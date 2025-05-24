@@ -18,7 +18,7 @@ jobs:
 
       - name: Create initial files (if they don't exist)
         run: |
-          mkdir -p scripts # <--- تغییر: اطمینان از وجود پوشه scripts در ریشه
+          mkdir -p scripts # اطمینان از وجود پوشه scripts در ریشه
           if [ ! -f repositories.txt ]; then
             echo "https://github.com/actions/checkout" > repositories.txt
             echo "https://github.com/cli/cli" >> repositories.txt
@@ -34,11 +34,8 @@ jobs:
             echo "" >> README.md
             echo "این مخزن به صورت خودکار به‌روز می‌شود." >> README.md
           fi
-          # ایجاد فایل پایتون اگر وجود نداشت (با مسیر جدید)
-          if [ ! -f scripts/update_readme.py ]; then # <--- تغییر: بررسی مسیر scripts/update_readme.py
-            echo "print('Error: Python script scripts/update_readme.py not found!')" > scripts/update_readme.py
-            echo "print('Please ensure it exists at scripts/update_readme.py.')" >> scripts/update_readme.py
-            echo "exit(1)" >> scripts/update_readme.py
+          # بررسی وجود فایل پایتون
+          if [ ! -f scripts/update_readme.py ]; then
             echo "##### IMPORTANT: You need to ensure scripts/update_readme.py exists! #####"
             exit 1
           fi
@@ -64,9 +61,11 @@ jobs:
           while IFS= read -r repo_url || [[ -n "$repo_url" ]]; do
             if [ -z "$repo_url" ]; then continue; fi
             repo_path=$(echo "$repo_url" | sed -E 's|https?://github.com/||' | sed 's/\.git$//' | sed 's/\/$//')
+            repo_name="${repo_path##*/}" # <--- **خط جدید: استخراج نام مخزن**
             echo "Processing $repo_path..."
-            repo_link="[$repo_path]($repo_url)"
+            repo_link="[$repo_name]($repo_url)" # <--- **تغییر: استفاده از نام مخزن برای متن لینک**
 
+            # --- دریافت آخرین نسخه ---
             release_data=$(gh api repos/$repo_path/releases/latest --jq '{tagName: .tag_name, url: .html_url}' 2>/dev/null) || true
             if [ -z "$release_data" ] || [ "$(echo "$release_data" | jq -r '.tagName')" == "null" ]; then
               tag_name="پیدا نشد"
@@ -77,6 +76,7 @@ jobs:
               echo "  -> Found release: $tag_name"
             fi
 
+            # --- بررسی شرط جدید و جستجو برای منبع ---
             if [ "$repo_path" == "$TELEGRAM_REPO" ]; then
               source_content="[دانلود تلگرام]($TELEGRAM_DOWNLOAD_URL)"
               echo "  -> Special handling for $repo_path."
@@ -118,7 +118,7 @@ jobs:
         shell: bash
 
       - name: Update README.md using Python script
-        run: python scripts/update_readme.py # <--- تغییر: اجرای پایتون از مسیر scripts/update_readme.py
+        run: python scripts/update_readme.py
         shell: bash
 
       - name: Commit and push changes
