@@ -61,9 +61,10 @@ jobs:
           while IFS= read -r repo_url || [[ -n "$repo_url" ]]; do
             if [ -z "$repo_url" ]; then continue; fi
             repo_path=$(echo "$repo_url" | sed -E 's|https?://github.com/||' | sed 's/\.git$//' | sed 's/\/$//')
-            repo_name="${repo_path##*/}" # <--- **خط جدید: استخراج نام مخزن**
+            repo_name_raw="${repo_path##*/}"
+            repo_name_clean=$(echo "$repo_name_raw" | tr -d '_') # <--- **خط جدید: حذف '_' از نام**
             echo "Processing $repo_path..."
-            repo_link="[$repo_name]($repo_url)" # <--- **تغییر: استفاده از نام مخزن برای متن لینک**
+            repo_link="[$repo_name_clean]($repo_url)" # <--- **تغییر: استفاده از نام بدون '_'**
 
             # --- دریافت آخرین نسخه ---
             release_data=$(gh api repos/$repo_path/releases/latest --jq '{tagName: .tag_name, url: .html_url}' 2>/dev/null) || true
