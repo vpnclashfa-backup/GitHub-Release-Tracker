@@ -55,7 +55,7 @@ jobs:
 
           echo "**آخرین بررسی:** $(date -u '+%Y-%m-%d %H:%M:%S') UTC" > $TEMP_OUTPUT
           echo "" >> $TEMP_OUTPUT
-          echo "| مخزن | آخرین نسخه | لینک نسخه | منبع |" >> $TEMP_OUTPUT
+          echo "| لینک مخزن | آخرین نسخه | لینک نسخه | منبع |" >> $TEMP_OUTPUT
           echo "|---|---|---|---|" >> $TEMP_OUTPUT
 
           while IFS= read -r repo_url || [[ -n "$repo_url" ]]; do
@@ -79,7 +79,7 @@ jobs:
 
             # --- بررسی شرط جدید و جستجو برای منبع ---
             if [ "$repo_path" == "$TELEGRAM_REPO" ]; then
-              source_content="[دانلود تلگرام]($TELEGRAM_DOWNLOAD_URL)"
+              source_content="[لینک منبع]($TELEGRAM_DOWNLOAD_URL)"
               echo "  -> Special handling for $repo_path."
             else
               source_content="یافت نشد"
