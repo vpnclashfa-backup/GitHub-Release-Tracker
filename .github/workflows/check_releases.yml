@@ -18,13 +18,12 @@ jobs:
 
       - name: Create initial files (if they don't exist)
         run: |
-          # ایجاد فایل repositories.txt اگر وجود نداشت
+          mkdir -p .github/scripts # اطمینان از وجود پوشه اسکریپت
           if [ ! -f repositories.txt ]; then
             echo "https://github.com/actions/checkout" > repositories.txt
             echo "https://github.com/cli/cli" >> repositories.txt
             echo "https://github.com/vpnclashfa-backup/telegram-auto-release" >> repositories.txt
           fi
-          # ایجاد فایل README.md با نشانگرها اگر وجود نداشت
           if [ ! -f README.md ]; then
             echo "# رهیاب نسخه‌ها" > README.md
             echo "" >> README.md
@@ -35,15 +34,22 @@ jobs:
             echo "" >> README.md
             echo "این مخزن به صورت خودکار به‌روز می‌شود." >> README.md
           fi
+          # ایجاد فایل پایتون اگر وجود نداشت (برای اطمینان)
+          if [ ! -f .github/scripts/update_readme.py ]; then
+            echo "print('Error: Python script .github/scripts/update_readme.py not found!')" > .github/scripts/update_readme.py
+            echo "print('Please create it manually with the provided code.')" >> .github/scripts/update_readme.py
+            echo "exit(1)" >> .github/scripts/update_readme.py
+            echo "##### IMPORTANT: You need to create .github/scripts/update_readme.py manually! #####"
+            exit 1
+          fi
         shell: bash
 
-      - name: Check for Latest Releases and Source URLs
+      - name: Check for Latest Releases and Generate Table
         id: check_releases
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: | # <--- استفاده از | برای اسکریپت چند خطی
-          set -e # توقف اسکریپت در صورت بروز خطا (مگر اینکه مدیریت شود)
-
+        run: |
+          set -e
           TEMP_OUTPUT="releases_content.md"
           REPO_LIST_FILE="repositories.txt"
           URLS_FILENAME="urls_to_check.txt"
@@ -61,8 +67,7 @@ jobs:
             echo "Processing $repo_path..."
             repo_link="[$repo_path]($repo_url)"
 
-            # --- دریافت آخرین نسخه ---
-            release_data=$(gh api repos/$repo_path/releases/latest --jq '{tagName: .tag_name, url: .html_url}' 2>/dev/null) || true # || true برای اطمینان از عدم خروج در صورت خطا
+            release_data=$(gh api repos/$repo_path/releases/latest --jq '{tagName: .tag_name, url: .html_url}' 2>/dev/null) || true
             if [ -z "$release_data" ] || [ "$(echo "$release_data" | jq -r '.tagName')" == "null" ]; then
               tag_name="پیدا نشد"
               release_url="#"
@@ -72,7 +77,6 @@ jobs:
               echo "  -> Found release: $tag_name"
             fi
 
-            # --- بررسی شرط جدید و جستجو برای منبع ---
             if [ "$repo_path" == "$TELEGRAM_REPO" ]; then
               source_content="[دانلود تلگرام]($TELEGRAM_DOWNLOAD_URL)"
               echo "  -> Special handling for $repo_path."
@@ -82,29 +86,21 @@ jobs:
               source_url_master="https://raw.githubusercontent.com/$repo_path/master/$URLS_FILENAME"
               TMP_URL_FILE="tmp_url.txt"
               fetched_url=""
-
-              # Try main branch (handle 404 gracefully - Safe version)
               http_code_main=$(curl -sSL "$source_url_main" -o $TMP_URL_FILE -w "%{http_code}")
               if [ "$http_code_main" -eq 200 ]; then
-                  echo "  -> Found $URLS_FILENAME on main branch."
                   fetched_url=$(cat $TMP_URL_FILE)
               else
-                  # Try master branch if main failed or didn't return 200
                   http_code_master=$(curl -sSL "$source_url_master" -o $TMP_URL_FILE -w "%{http_code}")
                   if [ "$http_code_master" -eq 200 ]; then
-                      echo "  -> Found $URLS_FILENAME on master branch."
                       fetched_url=$(cat $TMP_URL_FILE)
                   fi
               fi
-              rm -f $TMP_URL_FILE # Clean up temp file
-
+              rm -f $TMP_URL_FILE
               if [ -n "$fetched_url" ]; then
                   first_line_url=$(echo "$fetched_url" | head -n 1 | tr -d '[:space:]')
                   if [ -n "$first_line_url" ]; then
-                      echo "  -> Found source URL: $first_line_url"
                       source_content="[لینک منبع]($first_line_url)"
                   else
-                      echo "  -> $URLS_FILENAME found but empty for $repo_path."
                       source_content="فایل منبع خالی"
                   fi
               else
@@ -118,45 +114,12 @@ jobs:
           echo "---" >> $TEMP_OUTPUT
           echo "**نکته:** برای راحت‌تر به‌روز کردن اپلیکیشن‌های اندروید (در صورت وجود)، لینک هر مخزن را در اپلیکیشن [Obtainium](https://github.com/ImranR98/Obtainium) وارد کنید." >> $TEMP_OUTPUT
 
-          echo "✅ Table content generated."
+          echo "✅ Table content generated into $TEMP_OUTPUT."
+        shell: bash
 
-          # --- استفاده از پایتون برای جایگذاری محتوا در README.md ---
-          python - <<EOF
-import re
-import os
-
-table_file = 'releases_content.md'
-readme_file = 'README.md'
-start_marker = ''
-end_marker = ''
-
-try:
-    with open(table_file, 'r', encoding='utf-8') as f:
-        table_content = f.read()
-
-    with open(readme_file, 'r', encoding='utf-8') as f:
-        readme_content = f.read()
-
-    if start_marker not in readme_content or end_marker not in readme_content:
-        print(f"Error: Markers {start_marker} and {end_marker} not found in {readme_file}.")
-        exit(1)
-
-    new_readme = re.sub(
-        rf'{start_marker}(.*?){end_marker}',
-        f'{start_marker}\n{table_content}\n{end_marker}',
-        readme_content,
-        flags=re.DOTALL | re.IGNORECASE
-    )
-
-    with open(readme_file, 'w', encoding='utf-8') as f:
-        f.write(new_readme)
-
-    print(f"✅ {readme_file} updated successfully.")
-
-except FileNotFoundError:
-    print(f"Error: {readme_file} or {table_file} not found.")
-    exit(1)
-EOF # <--- بسیار مهم: این خط باید بدون هیچ فاصله‌ای در ابتدا باشد
+      - name: Update README.md using Python script
+        run: python .github/scripts/update_readme.py
+        shell: bash
 
       - name: Commit and push changes
         run: |
