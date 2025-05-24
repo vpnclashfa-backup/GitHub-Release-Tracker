@@ -2,7 +2,8 @@ name: Check Latest Releases
 
 on:
   schedule:
-    - cron: '0 0 * * 0' # اجرای خودکار هر یکشنبه ساعت ۰۰:۰۰ UTC
+    # اجرای روزانه ساعت ۱۸:۱۵ UTC (مطابق با ۲۱:۴۵ شب به وقت تهران)
+    - cron: '15 18 * * *'
   workflow_dispatch: # امکان اجرای دستی
 
 jobs:
@@ -22,6 +23,14 @@ jobs:
             echo "https://github.com/cli/cli" >> repositories.txt
             echo "https://github.com/vpnclashfa-backup/telegram-auto-release" >> repositories.txt
           fi
+          if [ ! -f README.md ]; then
+            echo "# رهیاب نسخه‌ها" > README.md
+            echo "" >> README.md
+            echo "لیست آخرین نسخه‌های مخازن مورد نظر:" >> README.md
+            echo "" >> README.md
+            echo "" >> README.md
+            echo "" >> README.md
+          fi
         shell: bash
 
       - name: Check for Latest Releases and Source URLs
@@ -29,22 +38,19 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          OUTPUT_FILE="LATEST_RELEASES.md"
+          TEMP_OUTPUT="releases_content.md"
           REPO_LIST_FILE="repositories.txt"
           URLS_FILENAME="urls_to_check.txt"
           TELEGRAM_REPO="vpnclashfa-backup/telegram-auto-release"
           TELEGRAM_DOWNLOAD_URL="https://telegram.org/apps"
 
-          echo "# 🚀 آخرین نسخه مخازن 🚀" > $OUTPUT_FILE
-          echo "" >> $OUTPUT_FILE
-          echo "**آخرین بررسی:** $(date -u '+%Y-%m-%d %H:%M:%S') UTC" >> $OUTPUT_FILE
-          echo "" >> $OUTPUT_FILE
-          echo "| مخزن | آخرین نسخه | لینک نسخه | منبع |" >> $OUTPUT_FILE
-          echo "|---|---|---|---|" >> $OUTPUT_FILE
+          echo "**آخرین بررسی:** $(date -u '+%Y-%m-%d %H:%M:%S') UTC" > $TEMP_OUTPUT
+          echo "" >> $TEMP_OUTPUT
+          echo "| مخزن | آخرین نسخه | لینک نسخه | منبع |" >> $TEMP_OUTPUT
+          echo "|---|---|---|---|" >> $TEMP_OUTPUT
 
           while IFS= read -r repo_url || [[ -n "$repo_url" ]]; do
             if [ -z "$repo_url" ]; then continue; fi
-
             repo_path=$(echo "$repo_url" | sed -E 's|https?://github.com/||' | sed 's/\.git$//' | sed 's/\/$//')
             echo "Processing $repo_path..."
             repo_link="[$repo_path]($repo_url)"
@@ -62,58 +68,90 @@ jobs:
 
             # --- بررسی شرط جدید و جستجو برای منبع ---
             if [ "$repo_path" == "$TELEGRAM_REPO" ]; then
-              # اگر مخزن تلگرام بود، لینک دانلود مستقیم را قرار بده
               source_content="[دانلود تلگرام]($TELEGRAM_DOWNLOAD_URL)"
-              echo "  -> Special handling for $repo_path. Setting source to Telegram link."
+              echo "  -> Special handling for $repo_path."
             else
-              # برای بقیه مخازن، فایل urls_to_check.txt را جستجو کن
               source_content="یافت نشد"
               source_url_main="https://raw.githubusercontent.com/$repo_path/main/$URLS_FILENAME"
               source_url_master="https://raw.githubusercontent.com/$repo_path/master/$URLS_FILENAME"
               TMP_URL_FILE="tmp_url.txt"
-
-              echo "  -> Trying $URLS_FILENAME on main branch..."
-              # استفاده از 'if curl ...' برای جلوگیری از خروج با خطا
               if curl -sSfL "$source_url_main" -o $TMP_URL_FILE; then
                   fetched_url=$(cat $TMP_URL_FILE)
               elif curl -sSfL "$source_url_master" -o $TMP_URL_FILE; then
-                  echo "  -> Trying $URLS_FILENAME on master branch..."
                   fetched_url=$(cat $TMP_URL_FILE)
               else
                   fetched_url=""
               fi
-              rm -f $TMP_URL_FILE # پاک کردن فایل موقت
-
+              rm -f $TMP_URL_FILE
               if [ -n "$fetched_url" ]; then
                   first_line_url=$(echo "$fetched_url" | head -n 1 | tr -d '[:space:]')
                   if [ -n "$first_line_url" ]; then
-                      echo "  -> Found source URL: $first_line_url"
                       source_content="[لینک منبع]($first_line_url)"
                   else
-                      echo "  -> $URLS_FILENAME found but empty for $repo_path."
-                      source_content="فایل منبع خالی" # پیام بهتر برای فایل خالی
+                      source_content="فایل منبع خالی"
                   fi
               else
                   echo "  -> No $URLS_FILENAME found for $repo_path."
               fi
             fi
-
-            # --- اضافه کردن سطر به فایل Markdown ---
-            echo "| $repo_link | **$tag_name** | [مشاهده]($release_url) | $source_content |" >> $OUTPUT_FILE
-
+            echo "| $repo_link | **$tag_name** | [مشاهده]($release_url) | $source_content |" >> $TEMP_OUTPUT
           done < "$REPO_LIST_FILE"
 
-          echo "✅ Processing complete. File $OUTPUT_FILE generated."
+          # --- بخش جدید: اضافه کردن متن نهایی ---
+          echo "" >> $TEMP_OUTPUT
+          echo "---" >> $TEMP_OUTPUT
+          echo "**نکته:** برای راحت‌تر به‌روز کردن اپلیکیشن‌های اندروید (در صورت وجود)، لینک هر مخزن را در اپلیکیشن [Obtainium](https://github.com/ImranR98/Obtainium) وارد کنید." >> $TEMP_OUTPUT
+          # --- پایان بخش جدید ---
+
+          echo "✅ Table content generated."
+
+          # --- استفاده از پایتون برای جایگذاری محتوا در README.md ---
+          python - <<EOF
+import re
+import os
+
+table_file = '$TEMP_OUTPUT'
+readme_file = 'README.md'
+start_marker = ''
+end_marker = ''
+
+try:
+    with open(table_file, 'r', encoding='utf-8') as f:
+        table_content = f.read()
+
+    with open(readme_file, 'r', encoding='utf-8') as f:
+        readme_content = f.read()
+
+    if start_marker not in readme_content or end_marker not in readme_content:
+        print(f"Error: Markers {start_marker} and {end_marker} not found in {readme_file}.")
+        exit(1)
+
+    new_readme = re.sub(
+        rf'{start_marker}(.*?){end_marker}',
+        f'{start_marker}\n{table_content}\n{end_marker}',
+        readme_content,
+        flags=re.DOTALL | re.IGNORECASE
+    )
+
+    with open(readme_file, 'w', encoding='utf-8') as f:
+        f.write(new_readme)
+
+    print(f"✅ {readme_file} updated successfully.")
+
+except FileNotFoundError:
+    print(f"Error: {readme_file} or {table_file} not found.")
+    exit(1)
+EOF
 
       - name: Commit and push changes
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add LATEST_RELEASES.md
+          git add README.md
           if git diff --staged --quiet; then
-            echo "No changes to commit."
+            echo "No changes to commit in README.md."
           else
-            git commit -m "chore: به‌روزرسانی لیست آخرین نسخه‌ها و منابع"
+            git commit -m "chore: به‌روزرسانی لیست آخرین نسخه‌ها در README.md"
             git push
           fi
         shell: bash
