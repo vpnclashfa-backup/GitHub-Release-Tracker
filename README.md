@@ -1,10 +1,10 @@
 # رهیاب نسخه‌ها
 
-**آخرین بررسی:** 2025-05-24 06:29:41 UTC
+**آخرین بررسی:** 2025-05-24 06:34:51 UTC
 
-| مخزن | آخرین نسخه | لینک نسخه | منبع |
+| لینک مخزن | آخرین نسخه | لینک نسخه | منبع |
 |---|---|---|---|
-| [telegram-auto-release](https://github.com/vpnclashfa-backup/telegram-auto-release) | **telegram-updates-2025-05-24** | [مشاهده](https://github.com/vpnclashfa-backup/telegram-auto-release/releases/tag/telegram-updates-2025-05-24) | [دانلود تلگرام](https://telegram.org/apps) |
+| [telegram-auto-release](https://github.com/vpnclashfa-backup/telegram-auto-release) | **telegram-updates-2025-05-24** | [مشاهده](https://github.com/vpnclashfa-backup/telegram-auto-release/releases/tag/telegram-updates-2025-05-24) | [لینک منبع](https://telegram.org/apps) |
 | [3ctoolboxproandroid](https://github.com/vpnclashfa-backup/3_c_t_o_o_l_b_o_x_p_r_o_a_n_d_r_o_i_d) | **updates-2025-05-24** | [مشاهده](https://github.com/vpnclashfa-backup/3_c_t_o_o_l_b_o_x_p_r_o_a_n_d_r_o_i_d/releases/tag/updates-2025-05-24) | [لینک منبع](https://www.farsroid.com/3c-toolbox-pro-android/) |
 | [Adm](https://github.com/vpnclashfa-backup/A_d_m) | **updates-2025-05-24** | [مشاهده](https://github.com/vpnclashfa-backup/A_d_m/releases/tag/updates-2025-05-24) | [لینک منبع](https://www.farsroid.com/advanced-download-manager-pro/) |
 | [adobephotoshoplightroomcc](https://github.com/vpnclashfa-backup/a_d_o_b_e_p_h_o_t_o_s_h_o_p_l_i_g_h_t_r_o_o_m_c_c) | **updates-2025-05-24** | [مشاهده](https://github.com/vpnclashfa-backup/a_d_o_b_e_p_h_o_t_o_s_h_o_p_l_i_g_h_t_r_o_o_m_c_c/releases/tag/updates-2025-05-24) | [لینک منبع](https://www.farsroid.com/adobe-photoshop-lightroom-cc/) |
