@@ -16,13 +16,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Create repository list file (if it doesn't exist)
+      - name: Create initial files (if they don't exist)
         run: |
+          # ایجاد فایل repositories.txt اگر وجود نداشت
           if [ ! -f repositories.txt ]; then
             echo "https://github.com/actions/checkout" > repositories.txt
             echo "https://github.com/cli/cli" >> repositories.txt
             echo "https://github.com/vpnclashfa-backup/telegram-auto-release" >> repositories.txt
           fi
+          # ایجاد فایل README.md با نشانگرها اگر وجود نداشت
           if [ ! -f README.md ]; then
             echo "# رهیاب نسخه‌ها" > README.md
             echo "" >> README.md
@@ -30,6 +32,8 @@ jobs:
             echo "" >> README.md
             echo "" >> README.md
             echo "" >> README.md
+            echo "" >> README.md
+            echo "این مخزن به صورت خودکار به‌روز می‌شود." >> README.md
           fi
         shell: bash
 
@@ -38,12 +42,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TEMP_OUTPUT="releases_content.md"
+          TEMP_OUTPUT="releases_content.md" # فایل موقت برای جدول
           REPO_LIST_FILE="repositories.txt"
           URLS_FILENAME="urls_to_check.txt"
           TELEGRAM_REPO="vpnclashfa-backup/telegram-auto-release"
           TELEGRAM_DOWNLOAD_URL="https://telegram.org/apps"
 
+          # نوشتن محتوای جدول در فایل موقت
           echo "**آخرین بررسی:** $(date -u '+%Y-%m-%d %H:%M:%S') UTC" > $TEMP_OUTPUT
           echo "" >> $TEMP_OUTPUT
           echo "| مخزن | آخرین نسخه | لینک نسخه | منبع |" >> $TEMP_OUTPUT
@@ -75,19 +80,30 @@ jobs:
               source_url_main="https://raw.githubusercontent.com/$repo_path/main/$URLS_FILENAME"
               source_url_master="https://raw.githubusercontent.com/$repo_path/master/$URLS_FILENAME"
               TMP_URL_FILE="tmp_url.txt"
-              if curl -sSfL "$source_url_main" -o $TMP_URL_FILE; then
-                  fetched_url=$(cat $TMP_URL_FILE)
-              elif curl -sSfL "$source_url_master" -o $TMP_URL_FILE; then
+              fetched_url="" # Reset before trying
+
+              # Try main branch (handle 404 gracefully)
+              http_code_main=$(curl -sSL "$source_url_main" -o $TMP_URL_FILE -w "%{http_code}")
+              if [ "$http_code_main" -eq 200 ]; then
+                  echo "  -> Found $URLS_FILENAME on main branch."
                   fetched_url=$(cat $TMP_URL_FILE)
               else
-                  fetched_url=""
+                  # Try master branch if main failed or didn't return 200
+                  http_code_master=$(curl -sSL "$source_url_master" -o $TMP_URL_FILE -w "%{http_code}")
+                  if [ "$http_code_master" -eq 200 ]; then
+                      echo "  -> Found $URLS_FILENAME on master branch."
+                      fetched_url=$(cat $TMP_URL_FILE)
+                  fi
               fi
-              rm -f $TMP_URL_FILE
+              rm -f $TMP_URL_FILE # Clean up temp file
+
               if [ -n "$fetched_url" ]; then
                   first_line_url=$(echo "$fetched_url" | head -n 1 | tr -d '[:space:]')
                   if [ -n "$first_line_url" ]; then
+                      echo "  -> Found source URL: $first_line_url"
                       source_content="[لینک منبع]($first_line_url)"
                   else
+                      echo "  -> $URLS_FILENAME found but empty for $repo_path."
                       source_content="فایل منبع خالی"
                   fi
               else
@@ -97,11 +113,10 @@ jobs:
             echo "| $repo_link | **$tag_name** | [مشاهده]($release_url) | $source_content |" >> $TEMP_OUTPUT
           done < "$REPO_LIST_FILE"
 
-          # --- بخش جدید: اضافه کردن متن نهایی ---
+          # --- اضافه کردن متن نهایی ---
           echo "" >> $TEMP_OUTPUT
           echo "---" >> $TEMP_OUTPUT
           echo "**نکته:** برای راحت‌تر به‌روز کردن اپلیکیشن‌های اندروید (در صورت وجود)، لینک هر مخزن را در اپلیکیشن [Obtainium](https://github.com/ImranR98/Obtainium) وارد کنید." >> $TEMP_OUTPUT
-          # --- پایان بخش جدید ---
 
           echo "✅ Table content generated."
 
