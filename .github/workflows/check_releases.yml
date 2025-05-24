@@ -18,7 +18,7 @@ jobs:
 
       - name: Create initial files (if they don't exist)
         run: |
-          mkdir -p .github/scripts # اطمینان از وجود پوشه اسکریپت
+          mkdir -p scripts # <--- تغییر: اطمینان از وجود پوشه scripts در ریشه
           if [ ! -f repositories.txt ]; then
             echo "https://github.com/actions/checkout" > repositories.txt
             echo "https://github.com/cli/cli" >> repositories.txt
@@ -34,12 +34,12 @@ jobs:
             echo "" >> README.md
             echo "این مخزن به صورت خودکار به‌روز می‌شود." >> README.md
           fi
-          # ایجاد فایل پایتون اگر وجود نداشت (برای اطمینان)
-          if [ ! -f .github/scripts/update_readme.py ]; then
-            echo "print('Error: Python script .github/scripts/update_readme.py not found!')" > .github/scripts/update_readme.py
-            echo "print('Please create it manually with the provided code.')" >> .github/scripts/update_readme.py
-            echo "exit(1)" >> .github/scripts/update_readme.py
-            echo "##### IMPORTANT: You need to create .github/scripts/update_readme.py manually! #####"
+          # ایجاد فایل پایتون اگر وجود نداشت (با مسیر جدید)
+          if [ ! -f scripts/update_readme.py ]; then # <--- تغییر: بررسی مسیر scripts/update_readme.py
+            echo "print('Error: Python script scripts/update_readme.py not found!')" > scripts/update_readme.py
+            echo "print('Please ensure it exists at scripts/update_readme.py.')" >> scripts/update_readme.py
+            echo "exit(1)" >> scripts/update_readme.py
+            echo "##### IMPORTANT: You need to ensure scripts/update_readme.py exists! #####"
             exit 1
           fi
         shell: bash
@@ -118,7 +118,7 @@ jobs:
         shell: bash
 
       - name: Update README.md using Python script
-        run: python .github/scripts/update_readme.py
+        run: python scripts/update_readme.py # <--- تغییر: اجرای پایتون از مسیر scripts/update_readme.py
         shell: bash
 
       - name: Commit and push changes
