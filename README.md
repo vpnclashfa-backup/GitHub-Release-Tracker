@@ -1,6 +1,6 @@
 # رهیاب نسخه‌ها
 
-**آخرین بررسی:** 2025-05-24 06:25:31 UTC
+**آخرین بررسی:** 2025-05-24 06:29:41 UTC
 
 | مخزن | آخرین نسخه | لینک نسخه | منبع |
 |---|---|---|---|
@@ -61,5 +61,5 @@
 | [zarchiver](https://github.com/vpnclashfa-backup/z_a_r_c_h_i_v_e_r) | **updates-2025-05-24** | [مشاهده](https://github.com/vpnclashfa-backup/z_a_r_c_h_i_v_e_r/releases/tag/updates-2025-05-24) | [لینک منبع](https://www.farsroid.com/zarchiver/) |
 
 ---
-**نکته:** برای راحت‌تر به‌روز کردن اپلیکیشن‌های اندروید (در صورت وجود)، لینک هر مخزن را در اپلیکیشن [Obtainium](https://github.com/ImranR98/Obtainium) وارد کنید.
+**نکته:** برای راحت‌تر به‌روز کردن اپلیکیشن‌های اندروید ، لینک هر مخزن را در اپلیکیشن [Obtainium](https://github.com/ImranR98/Obtainium) وارد کنید.
 
