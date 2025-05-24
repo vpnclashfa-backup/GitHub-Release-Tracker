@@ -113,7 +113,7 @@ jobs:
 
           echo "" >> $TEMP_OUTPUT
           echo "---" >> $TEMP_OUTPUT
-          echo "**نکته:** برای راحت‌تر به‌روز کردن اپلیکیشن‌های اندروید (در صورت وجود)، لینک هر مخزن را در اپلیکیشن [Obtainium](https://github.com/ImranR98/Obtainium) وارد کنید." >> $TEMP_OUTPUT
+          echo "**نکته:** برای راحت‌تر به‌روز کردن اپلیکیشن‌های اندروید ، لینک هر مخزن را در اپلیکیشن [Obtainium](https://github.com/ImranR98/Obtainium) وارد کنید." >> $TEMP_OUTPUT
 
           echo "✅ Table content generated into $TEMP_OUTPUT."
         shell: bash
