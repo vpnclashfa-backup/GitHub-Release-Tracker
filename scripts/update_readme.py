@@ -8,38 +8,52 @@ START_MARKER = ''
 END_MARKER = ''
 # -------------------
 
-def update_readme():
-    """Reads the generated table and updates the README.md file."""
-    print(f"Starting README update...")
+def update_readme_line_by_line():
+    """Reads the generated table and updates the README.md file line by line."""
+    print(f"Starting README update (line-by-line method)...")
     try:
         # Read the generated table content
         print(f"Reading table from {TABLE_FILE}...")
         with open(TABLE_FILE, 'r', encoding='utf-8') as f:
-            table_content = f.read()
+            table_content = f.read().strip()
 
-        # Read the current README content
+        # Read the current README lines
         print(f"Reading {README_FILE}...")
         with open(README_FILE, 'r', encoding='utf-8') as f:
-            readme_content = f.read()
+            lines = f.readlines()
 
-        # Check for markers
-        if START_MARKER not in readme_content or END_MARKER not in readme_content:
-            print(f"Error: Markers {START_MARKER} and {END_MARKER} not found in {README_FILE}.")
+        new_lines = []
+        in_block = False
+        block_written = False
+
+        for line in lines:
+            # Strip leading/trailing whitespace to handle potential variations
+            stripped_line = line.strip()
+
+            if stripped_line == START_MARKER:
+                if not block_written:
+                    # Found the start, write the new block
+                    new_lines.append(START_MARKER + '\n')
+                    new_lines.append(table_content + '\n')
+                    new_lines.append(END_MARKER + '\n')
+                    block_written = True
+                in_block = True
+            elif stripped_line == END_MARKER:
+                # Found the end, stop ignoring lines
+                in_block = False
+            elif not in_block:
+                # If not inside the block, keep the line
+                new_lines.append(line)
+
+        # Check if we actually found the block and wrote it
+        if not block_written:
+            print(f"Error: {START_MARKER} not found. Could not insert table.")
             exit(1)
-
-        # Replace content between markers
-        print("Replacing content between markers...")
-        new_readme = re.sub(
-            rf'{START_MARKER}(.*?){END_MARKER}',
-            f'{START_MARKER}\n{table_content}\n{END_MARKER}',
-            readme_content,
-            flags=re.DOTALL | re.IGNORECASE
-        )
 
         # Write the updated content back to README
         print(f"Writing updated content to {README_FILE}...")
         with open(README_FILE, 'w', encoding='utf-8') as f:
-            f.write(new_readme)
+            f.writelines(new_lines)
 
         print(f"✅ {README_FILE} updated successfully.")
 
@@ -56,4 +70,4 @@ def update_readme():
             os.remove(TABLE_FILE)
 
 if __name__ == "__main__":
-    update_readme()
+    update_readme_line_by_line()
