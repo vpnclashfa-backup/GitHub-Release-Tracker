@@ -1,0 +1,113 @@
+name: Check Latest Releases
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # اجرای خودکار هر یکشنبه ساعت ۰۰:۰۰ UTC
+  workflow_dispatch: # امکان اجرای دستی
+
+jobs:
+  check-releases:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # نیاز به دسترسی برای کامیت
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create repository list file (if it doesn't exist)
+        run: |
+          if [ ! -f repositories.txt ]; then
+            echo "https://github.com/actions/checkout" > repositories.txt
+            echo "https://github.com/cli/cli" >> repositories.txt
+            # مثال برای مخزنی که ممکن است فایل urls_to_check.txt داشته باشد
+            # echo "https://github.com/vpnclashfa-backup/3_c_t_o_o_l_b_o_x_p_r_o_a_n_d_r_o_i_d" >> repositories.txt
+          fi
+        shell: bash
+
+      - name: Check for Latest Releases and Source URLs
+        id: check_releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OUTPUT_FILE="LATEST_RELEASES.md"
+          REPO_LIST_FILE="repositories.txt"
+          URLS_FILENAME="urls_to_check.txt"
+
+          echo "# 🚀 آخرین نسخه مخازن 🚀" > $OUTPUT_FILE
+          echo "" >> $OUTPUT_FILE
+          echo "**آخرین بررسی:** $(date -u '+%Y-%m-%d %H:%M:%S') UTC" >> $OUTPUT_FILE
+          echo "" >> $OUTPUT_FILE
+          # اضافه کردن ستون 'منبع' به جدول
+          echo "| مخزن | آخرین نسخه | لینک نسخه | منبع |" >> $OUTPUT_FILE
+          echo "|---|---|---|---|" >> $OUTPUT_FILE
+
+          while IFS= read -r repo_url || [[ -n "$repo_url" ]]; do
+            if [ -z "$repo_url" ]; then continue; fi
+
+            repo_path=$(echo "$repo_url" | sed -E 's|https?://github.com/||' | sed 's/\.git$//' | sed 's/\/$//')
+            echo "Processing $repo_path..."
+            repo_link="[$repo_path]($repo_url)"
+
+            # --- دریافت آخرین نسخه (مانند قبل) ---
+            release_data=$(gh api repos/$repo_path/releases/latest --jq '{tagName: .tag_name, url: .html_url}' 2>/dev/null)
+            if [ -z "$release_data" ] || [ "$(echo "$release_data" | jq -r '.tagName')" == "null" ]; then
+              tag_name="پیدا نشد"
+              release_url="#"
+            else
+              tag_name=$(echo "$release_data" | jq -r '.tagName')
+              release_url=$(echo "$release_data" | jq -r '.url')
+              echo "  -> Found release: $tag_name"
+            fi
+
+            # --- جستجو برای urls_to_check.txt (بخش جدید) ---
+            source_content="یافت نشد"
+            source_url_main="https://raw.githubusercontent.com/$repo_path/main/$URLS_FILENAME"
+            source_url_master="https://raw.githubusercontent.com/$repo_path/master/$URLS_FILENAME"
+
+            # تلاش برای خواندن از شاخه main
+            echo "  -> Trying $URLS_FILENAME on main branch..."
+            fetched_url=$(curl -sSfL "$source_url_main")
+            exit_code=$?
+
+            # اگر در main پیدا نشد، تلاش برای خواندن از شاخه master
+            if [ $exit_code -ne 0 ]; then
+              echo "  -> Trying $URLS_FILENAME on master branch..."
+              fetched_url=$(curl -sSfL "$source_url_master")
+              exit_code=$?
+            fi
+
+            # اگر فایل پیدا و خوانده شد
+            if [ $exit_code -eq 0 ] && [ -n "$fetched_url" ]; then
+              # خواندن خط اول و حذف فاصله‌های اضافی
+              first_line_url=$(echo "$fetched_url" | head -n 1 | tr -d '[:space:]')
+              if [ -n "$first_line_url" ]; then
+                  echo "  -> Found source URL: $first_line_url"
+                  # ایجاد لینک قابل کلیک
+                  source_content="[لینک منبع]($first_line_url)"
+              else
+                  echo "  -> $URLS_FILENAME found but empty for $repo_path."
+              fi
+            else
+              echo "  -> No $URLS_FILENAME found for $repo_path."
+            fi
+
+            # --- اضافه کردن سطر به فایل Markdown (با ستون جدید) ---
+            echo "| $repo_link | **$tag_name** | [مشاهده]($release_url) | $source_content |" >> $OUTPUT_FILE
+
+          done < "$REPO_LIST_FILE"
+
+          echo "✅ Processing complete. File $OUTPUT_FILE generated."
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add LATEST_RELEASES.md
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: به‌روزرسانی لیست آخرین نسخه‌ها و منابع"
+            git push
+          fi
+        shell: bash
