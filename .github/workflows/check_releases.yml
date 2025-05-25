@@ -25,7 +25,8 @@ jobs:
             echo "https://github.com/ImranR98/Obtainium" >> repositories.txt
             echo "https://github.com/vpnclashfa-backup/telegram-auto-release" >> repositories.txt
           fi
-          # ایجاد README.md اولیه با نشانگرها
+          
+          # ایجاد README.md اولیه با نشانگرها در صورت عدم وجود
           if [ ! -f README.md ]; then
             echo "Creating initial README.md with markers..."
             echo "# رهیاب نسخه‌ها" > README.md
@@ -33,29 +34,27 @@ jobs:
             echo "لیست آخرین نسخه‌های مخازن مورد نظر:" >> README.md
             echo "" >> README.md
             echo "" >> README.md # نشانگر شروع اضافه شد
-            echo "محتوای جدول در اینجا توسط اسکریپت قرار خواهد گرفت." >> README.md # این متن توسط اسکریپت جایگزین می‌شود
+            echo "محتوای جدول در اینجا توسط اسکریپت قرار خواهد گرفت." >> README.md 
             echo "" >> README.md   # نشانگر پایان اضافه شد
             echo "" >> README.md
             echo "این مخزن به صورت خودکار به‌روز می‌شود." >> README.md
             echo "README.md created with markers."
           else
             echo "README.md already exists."
-            # بررسی کنید که آیا نشانگرها وجود دارند یا خیر و در صورت نیاز آنها را اضافه کنید
+            # بررسی وجود نشانگرها در فایل README.md موجود
             if ! grep -q "" README.md || ! grep -q "" README.md; then
-              echo "Warning: Markers not found in existing README.md. Appending them."
-              # این بخش می‌تواند پیچیده باشد اگر بخواهیم نشانگرها را در جای خاصی قرار دهیم.
-              # برای سادگی، اگر نشانگرها نیستند، اسکریپت پایتون به انتهای فایل اضافه خواهد کرد.
-              # یا می‌توانیم یک نسخه پشتیبان تهیه کرده و فایل را با نشانگرها بازنویسی کنیم:
-              # mv README.md README.md.bak
-              # echo "# رهیاب نسخه‌ها" > README.md
-              # ... (محتوای اولیه با نشانگرها) ...
-              # cat README.md.bak >> README.md # محتوای قبلی را بعد از نشانگرها اضافه می‌کند (اگر لازم باشد)
-              # در اینجا، به اسکریپت پایتون اجازه می‌دهیم که اگر نشانگرها را پیدا نکرد، به انتها اضافه کند.
+              echo "Warning: Markers are missing in the existing README.md!"
+              echo "The Python script will attempt to append the table, which might lead to duplication if old content isn't manually removed or markers added."
+              echo "Please ensure your README.md contains these lines:"
+              echo ""
+              echo ""
+              echo "with the content to be replaced between them."
             fi
           fi
+
           # بررسی وجود فایل پایتون
           if [ ! -f scripts/update_readme.py ]; then
-            echo "##### IMPORTANT: Python script scripts/update_readme.py not found! #####"
+            echo "##### CRITICAL: Python script scripts/update_readme.py not found! #####"
             exit 1
           fi
         shell: bash
@@ -65,7 +64,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          set -e
+          set -e # Exit immediately if a command exits with a non-zero status.
           TEMP_OUTPUT="releases_content.md"
           REPO_LIST_FILE="repositories.txt"
           URLS_FILENAME="urls_to_check.txt"
@@ -73,12 +72,14 @@ jobs:
           TELEGRAM_DOWNLOAD_URL="https://telegram.org/apps"
 
           # اطمینان از اینکه فایل موقت خالی است یا ایجاد می‌شود
-          > $TEMP_OUTPUT
+          # این دستور فایل را خالی می‌کند یا اگر وجود نداشته باشد، آن را ایجاد می‌کند
+          > "$TEMP_OUTPUT"
 
-          echo "**آخرین بررسی:** $(date -u '+%Y-%m-%d %H:%M:%S') UTC" >> $TEMP_OUTPUT
-          echo "" >> $TEMP_OUTPUT
-          echo "| لینک مخزن | آخرین نسخه | لینک نسخه | منبع |" >> $TEMP_OUTPUT
-          echo "|---|---|---|---|" >> $TEMP_OUTPUT
+          echo "**آخرین بررسی:** $(date -u '+%Y-%m-%d %H:%M:%S') UTC" >> "$TEMP_OUTPUT"
+          echo "" >> "$TEMP_OUTPUT"
+          # حذف ستون "لینک نسخه" از هدر
+          echo "| لینک مخزن | آخرین نسخه | منبع |" >> "$TEMP_OUTPUT"
+          echo "|---|---|---|" >> "$TEMP_OUTPUT"
 
           if [ ! -f "$REPO_LIST_FILE" ]; then
             echo "Error: $REPO_LIST_FILE not found!"
@@ -86,61 +87,65 @@ jobs:
           fi
 
           while IFS= read -r repo_url || [[ -n "$repo_url" ]]; do
-            repo_url_cleaned=$(echo "$repo_url" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//') # حذف CR و فضاهای خالی ابتدا و انتها
+            # حذف کاراکترهای بازگشت به ابتدای خط (CR) و فضاهای خالی ابتدا و انتها
+            repo_url_cleaned=$(echo "$repo_url" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//') 
             if [ -z "$repo_url_cleaned" ]; then continue; fi
 
             repo_path=$(echo "$repo_url_cleaned" | sed -E 's|https?://github.com/||' | sed 's/\.git$//' | sed 's/\/$//')
             repo_name_raw="${repo_path##*/}"
+            # جایگزینی '-' و '_' با فاصله و تبدیل به حروف بزرگ برای اولین حرف هر کلمه
             repo_name_clean=$(echo "$repo_name_raw" | sed 's/-/ /g; s/_/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2); print}')
             repo_link="[$repo_name_clean]($repo_url_cleaned)"
 
             echo "Processing $repo_path..."
+            # فقط tag_name و html_url را از API دریافت می‌کنیم چون فقط به آن‌ها نیاز داریم
             release_data=$(gh api "repos/$repo_path/releases/latest" --jq '{tagName: .tag_name, url: .html_url}' 2>/dev/null) || true
             
             tag_name_raw=""
-            release_url_raw=""
+            release_html_url_raw="" # این همان لینکی است که برای مشاهده نسخه استفاده می‌شود
 
             if [ -n "$release_data" ] && [ "$(echo "$release_data" | jq -r '.tagName')" != "null" ]; then
               tag_name_raw=$(echo "$release_data" | jq -r '.tagName')
-              release_url_raw=$(echo "$release_data" | jq -r '.url')
+              release_html_url_raw=$(echo "$release_data" | jq -r '.url') # لینک صفحه ریلیز
             fi
 
             if [ -z "$tag_name_raw" ] || [ "$tag_name_raw" == "null" ]; then
-              tag_name="پیدا نشد"
-              release_url="#"
+              tag_name_display="پیدا نشد"
+              # لینک به خود مخزن اگر نسخه خاصی پیدا نشد
+              release_link_display="[$tag_name_display]($repo_url_cleaned)" 
             else
-              tag_name="$tag_name_raw"
-              release_url="$release_url_raw"
-              echo "  -> Found release: $tag_name"
+              tag_name_display="$tag_name_raw"
+              # لینک به صفحه ریلیز با نام تگ به عنوان متن لینک
+              release_link_display="[**$tag_name_display**]($release_html_url_raw)" 
+              echo "  -> Found release: $tag_name_display, URL: $release_html_url_raw"
             fi
 
             source_content_link="یافت نشد" # مقدار پیش‌فرض
             if [ "$repo_path" == "$TELEGRAM_REPO" ]; then
-              source_content_link="[مشاهده]($TELEGRAM_DOWNLOAD_URL)" # تغییر متن لینک به "مشاهده"
+              source_content_link="[مشاهده]($TELEGRAM_DOWNLOAD_URL)"
               echo "  -> Special handling for $repo_path. Source: Telegram Site"
             else
               source_url_main="https://raw.githubusercontent.com/$repo_path/main/$URLS_FILENAME"
               source_url_master="https://raw.githubusercontent.com/$repo_path/master/$URLS_FILENAME"
-              TMP_URL_FILE="tmp_source_url_content.txt"
+              TMP_URL_FILE_FOR_SOURCE="tmp_source_url_content.txt" # نام فایل موقت متفاوت برای جلوگیری از تداخل
               fetched_url_content=""
               
-              # تلاش برای خواندن از main
-              http_code_main=$(curl -sSL "$source_url_main" -o $TMP_URL_FILE -w "%{http_code}")
+              http_code_main=$(curl --silent --location --output "$TMP_URL_FILE_FOR_SOURCE" --write-out "%{http_code}" "$source_url_main")
               if [ "$http_code_main" -eq 200 ]; then
-                fetched_url_content=$(cat $TMP_URL_FILE)
+                fetched_url_content=$(cat "$TMP_URL_FILE_FOR_SOURCE")
               else
-                # تلاش برای خواندن از master اگر main موفق نبود
-                http_code_master=$(curl -sSL "$source_url_master" -o $TMP_URL_FILE -w "%{http_code}")
+                http_code_master=$(curl --silent --location --output "$TMP_URL_FILE_FOR_SOURCE" --write-out "%{http_code}" "$source_url_master")
                 if [ "$http_code_master" -eq 200 ]; then
-                  fetched_url_content=$(cat $TMP_URL_FILE)
+                  fetched_url_content=$(cat "$TMP_URL_FILE_FOR_SOURCE")
                 fi
               fi
-              rm -f $TMP_URL_FILE
+              rm -f "$TMP_URL_FILE_FOR_SOURCE"
 
               if [ -n "$fetched_url_content" ]; then
+                # حذف BOM و فضای خالی و گرفتن اولین خط
                 first_line_url=$(echo "$fetched_url_content" | sed '1q' | sed 's/^\xEF\xBB\xBF//' | tr -d '[:space:]')
                 if [ -n "$first_line_url" ]; then
-                  source_content_link="[مشاهده]($first_line_url)" # تغییر متن لینک به "مشاهده"
+                  source_content_link="[مشاهده]($first_line_url)"
                   echo "  -> Source URL found in $URLS_FILENAME: $first_line_url"
                 else
                   source_content_link="فایل منبع خالی"
@@ -151,12 +156,13 @@ jobs:
                 source_content_link="یافت نشد"
               fi
             fi
-            echo "| $repo_link | [**$tag_name**]($release_url) | [مشاهده]($release_url) | $source_content_link |" >> $TEMP_OUTPUT
+            # حذف ستون "لینک نسخه" از ردیف داده
+            echo "| $repo_link | $release_link_display | $source_content_link |" >> "$TEMP_OUTPUT"
           done < "$REPO_LIST_FILE"
 
-          echo "" >> $TEMP_OUTPUT
-          echo "---" >> $TEMP_OUTPUT
-          echo "**نکته:** برای راحت‌تر به‌روز کردن اپلیکیشن‌های اندروید ، لینک هر مخزن را در اپلیکیشن [Obtainium](https://github.com/ImranR98/Obtainium) وارد کنید." >> $TEMP_OUTPUT
+          echo "" >> "$TEMP_OUTPUT"
+          echo "---" >> "$TEMP_OUTPUT"
+          echo "**نکته:** برای راحت‌تر به‌روز کردن اپلیکیشن‌های اندروید ، لینک هر مخزن را در اپلیکیشن [Obtainium](https://github.com/ImranR98/Obtainium) وارد کنید." >> "$TEMP_OUTPUT"
 
           echo "✅ Table content generated into $TEMP_OUTPUT."
         shell: bash
@@ -170,10 +176,11 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add README.md
+          # بررسی اینکه آیا تغییراتی برای کامیت وجود دارد یا خیر
           if git diff --staged --quiet; then
             echo "No changes to commit in README.md."
           else
-            git commit -m "chore: به‌روزرسانی لیست آخرین نسخه‌ها در README.md"
+            git commit -m "chore: به‌روزرسانی لیست آخرین نسخه‌ها و اصلاح ساختار جدول"
             git push
             echo "README.md committed and pushed."
           fi
