@@ -25,16 +25,26 @@ jobs:
             echo "https://github.com/ImranR98/Obtainium" >> repositories.txt
             echo "https://github.com/vpnclashfa-backup/telegram-auto-release" >> repositories.txt
           fi
+          # ایجاد README.md اولیه با نشانگرها
           if [ ! -f README.md ]; then
             echo "# رهیاب نسخه‌ها" > README.md
             echo "" >> README.md
             echo "لیست آخرین نسخه‌های مخازن مورد نظر:" >> README.md
             echo "" >> README.md
-            echo "" >> README.md
-            echo "محتوای جدول در اینجا توسط اسکریپت قرار خواهد گرفت." >> README.md # Placeholder
-            echo "" >> README.md
+            echo "" >> README.md # نشانگر شروع اضافه شد
+            echo "محتوای جدول در اینجا توسط اسکریپت قرار خواهد گرفت." >> README.md # این متن توسط اسکریپت جایگزین می‌شود
+            echo "" >> README.md   # نشانگر پایان اضافه شد
             echo "" >> README.md
             echo "این مخزن به صورت خودکار به‌روز می‌شود." >> README.md
+            echo "README.md created with markers."
+          else
+            # اگر README.md وجود دارد، بررسی کنید که آیا نشانگرها وجود دارند یا خیر
+            # اگر وجود ندارند، می‌توانید آنها را اضافه کنید یا یک هشدار نمایش دهید
+            if ! grep -q "" README.md || ! grep -q "" README.md; then
+              echo "Warning: README.md exists but markers are missing. The script might append content or fail."
+              # به صورت اختیاری، می‌توانید نشانگرها را به یک فایل README.md موجود اضافه کنید
+              # echo -e "\n\n\n" >> README.md
+            fi
           fi
           # بررسی وجود فایل پایتون (مطمئن شوید این فایل وجود دارد)
           if [ ! -f scripts/update_readme.py ]; then
@@ -51,80 +61,105 @@ jobs:
           set -e
           TEMP_OUTPUT="releases_content.md"
           REPO_LIST_FILE="repositories.txt"
-          URLS_FILENAME="urls_to_check.txt"
+          URLS_FILENAME="urls_to_check.txt" # نام فایل حاوی URL های منبع
           TELEGRAM_REPO="vpnclashfa-backup/telegram-auto-release"
           TELEGRAM_DOWNLOAD_URL="https://telegram.org/apps"
 
-          echo "**آخرین بررسی:** $(date -u '+%Y-%m-%d %H:%M:%S') UTC" > $TEMP_OUTPUT
+          # اطمینان از اینکه فایل موقت خالی است یا ایجاد می‌شود
+          > $TEMP_OUTPUT
+
+          echo "**آخرین بررسی:** $(date -u '+%Y-%m-%d %H:%M:%S') UTC" >> $TEMP_OUTPUT
           echo "" >> $TEMP_OUTPUT
           echo "| لینک مخزن | آخرین نسخه | لینک نسخه | منبع |" >> $TEMP_OUTPUT
           echo "|---|---|---|---|" >> $TEMP_OUTPUT
 
+          if [ ! -f "$REPO_LIST_FILE" ]; then
+            echo "Error: $REPO_LIST_FILE not found!"
+            exit 1
+          fi
+
           while IFS= read -r repo_url || [[ -n "$repo_url" ]]; do
             if [ -z "$repo_url" ]; then continue; fi
+            repo_url=$(echo "$repo_url" | tr -d '\r') # حذف کاراکترهای بازگشت به ابتدای خط (CR)
+            if [ -z "$repo_url" ]; then continue; fi
+
+
             repo_path=$(echo "$repo_url" | sed -E 's|https?://github.com/||' | sed 's/\.git$//' | sed 's/\/$//')
             repo_name_raw="${repo_path##*/}"
-            repo_name_clean=$(echo "$repo_name_raw" | sed 's/-/ /g; s/_/ /g') # جایگزینی '-' و '_' با فاصله
-            echo "Processing $repo_path..."
-            repo_link="[$repo_name_clean]($repo_url)" 
+            # جایگزینی '-' و '_' با فاصله و تبدیل به حروف بزرگ برای اولین حرف هر کلمه
+            repo_name_clean=$(echo "$repo_name_raw" | sed 's/-/ /g; s/_/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2); print}')
+            repo_link="[$repo_name_clean]($repo_url)"
 
-            # --- دریافت آخرین نسخه ---
-            release_data=$(gh api "repos/$repo_path/releases/latest" --jq '{tagName: .tag_name, url: .html_url}' 2>/dev/null) || true
+            echo "Processing $repo_path..."
+            release_data=$(gh api "repos/$repo_path/releases/latest" --jq '{tagName: .tag_name, url: .html_url, publishedAt: .published_at}' 2>/dev/null) || true
+            
             tag_name_raw=""
             release_url_raw=""
+            published_at_raw=""
+
             if [ -n "$release_data" ] && [ "$(echo "$release_data" | jq -r '.tagName')" != "null" ]; then
               tag_name_raw=$(echo "$release_data" | jq -r '.tagName')
               release_url_raw=$(echo "$release_data" | jq -r '.url')
+              published_at_raw=$(echo "$release_data" | jq -r '.publishedAt') # تاریخ انتشار
             fi
+
             if [ -z "$tag_name_raw" ] || [ "$tag_name_raw" == "null" ]; then
               tag_name="پیدا نشد"
               release_url="#"
+              # published_at_display="N/A"
             else
               tag_name="$tag_name_raw"
               release_url="$release_url_raw"
+              # published_at_display=$(date -d "$published_at_raw" '+%Y-%m-%d %H:%M' 2>/dev/null || echo "$published_at_raw")
               echo "  -> Found release: $tag_name"
             fi
 
-            # --- بررسی شرط جدید و جستجو برای منبع ---
             source_content="یافت نشد" # Default value
             if [ "$repo_path" == "$TELEGRAM_REPO" ]; then
-              source_content="[لینک منبع]($TELEGRAM_DOWNLOAD_URL)"
+              source_content="[سایت تلگرام]($TELEGRAM_DOWNLOAD_URL)"
               echo "  -> Special handling for $repo_path."
             else
+              # تلاش برای خواندن از main و سپس master
               source_url_main="https://raw.githubusercontent.com/$repo_path/main/$URLS_FILENAME"
               source_url_master="https://raw.githubusercontent.com/$repo_path/master/$URLS_FILENAME"
-              TMP_URL_FILE="tmp_url.txt"
-              fetched_url=""
+              TMP_URL_FILE="tmp_source_url_content.txt"
+              fetched_url_content=""
               
-              echo "  -> [DEBUG] Trying main: $source_url_main" # *** DEBUG LINE ***
+              echo "  -> [DEBUG] Trying main: $source_url_main"
               http_code_main=$(curl -sSL "$source_url_main" -o $TMP_URL_FILE -w "%{http_code}")
-              echo "  -> [DEBUG] Main HTTP Code: $http_code_main" # *** DEBUG LINE ***
+              echo "  -> [DEBUG] Main HTTP Code: $http_code_main"
               if [ "$http_code_main" -eq 200 ]; then
-                fetched_url=$(cat $TMP_URL_FILE)
+                fetched_url_content=$(cat $TMP_URL_FILE)
               else
-                echo "  -> [DEBUG] Trying master: $source_url_master" # *** DEBUG LINE ***
+                echo "  -> [DEBUG] Trying master: $source_url_master"
                 http_code_master=$(curl -sSL "$source_url_master" -o $TMP_URL_FILE -w "%{http_code}")
-                echo "  -> [DEBUG] Master HTTP Code: $http_code_master" # *** DEBUG LINE ***
+                echo "  -> [DEBUG] Master HTTP Code: $http_code_master"
                 if [ "$http_code_master" -eq 200 ]; then
-                  fetched_url=$(cat $TMP_URL_FILE)
+                  fetched_url_content=$(cat $TMP_URL_FILE)
                 fi
               fi
               rm -f $TMP_URL_FILE
 
-              echo "  -> [DEBUG] Fetched content (raw): '$fetched_url'" # *** DEBUG LINE ***
+              echo "  -> [DEBUG] Fetched source content (raw): '$fetched_url_content'"
 
-              if [ -n "$fetched_url" ]; then
-                # --- *** این خط تغییر کرده است (برای حذف BOM) *** ---
-                first_line_url=$(echo "$fetched_url" | head -n 1 | sed 's/^\xEF\xBB\xBF//' | tr -d '[:space:]')
-                echo "  -> [DEBUG] First line URL (cleaned): '$first_line_url'" # *** DEBUG LINE ***
+              if [ -n "$fetched_url_content" ]; then
+                # حذف BOM و فضای خالی و گرفتن اولین خط
+                first_line_url=$(echo "$fetched_url_content" | sed '1q' | sed 's/^\xEF\xBB\xBF//' | tr -d '[:space:]')
+                echo "  -> [DEBUG] First line URL (cleaned): '$first_line_url'"
                 if [ -n "$first_line_url" ]; then
-                  source_content="[لینک منبع]($first_line_url)"
+                  # استخراج نام فایل از URL برای نمایش
+                  source_link_name=$(basename "$first_line_url")
+                  # اگر نام فایل خیلی طولانی است، آن را کوتاه کنید
+                  if [ ${#source_link_name} -gt 30 ]; then
+                    source_link_name="${source_link_name:0:27}..."
+                  fi
+                  source_content="[${source_link_name}]($first_line_url)"
                 else
                   source_content="فایل منبع خالی"
                 fi
               else
                 echo "  -> No $URLS_FILENAME found for $repo_path."
-                source_content="یافت نشد" # اطمینان از مقداردهی
+                source_content="یافت نشد"
               fi
             fi
             echo "| $repo_link | [**$tag_name**]($release_url) | [مشاهده]($release_url) | $source_content |" >> $TEMP_OUTPUT
@@ -146,10 +181,12 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add README.md
+          # بررسی اینکه آیا تغییراتی برای کامیت وجود دارد یا خیر
           if git diff --staged --quiet; then
             echo "No changes to commit in README.md."
           else
             git commit -m "chore: به‌روزرسانی لیست آخرین نسخه‌ها در README.md"
             git push
+            echo "README.md committed and pushed."
           fi
         shell: bash
