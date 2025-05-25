@@ -17,7 +17,6 @@ def update_readme_with_regex():
         print(f"Reading table from {TABLE_FILE}...")
         if not os.path.exists(TABLE_FILE):
             print(f"Error: Table file {TABLE_FILE} not found. Skipping README update.")
-            # exit(1) # یا تصمیم بگیرید که آیا خروج از اسکریپت ضروری است یا خیر
             return
 
         with open(TABLE_FILE, 'r', encoding='utf-8') as f:
@@ -27,15 +26,14 @@ def update_readme_with_regex():
         print(f"Reading {README_FILE}...")
         if not os.path.exists(README_FILE):
             print(f"Error: README file {README_FILE} not found. Cannot update.")
-            # اگر README وجود ندارد، شاید بخواهید آن را با محتوای جدول ایجاد کنید
-            # یا اینکه خطا داده و خارج شوید. در اینجا فرض می‌کنیم باید وجود داشته باشد.
-            # For example, create it:
-            # print(f"{README_FILE} not found. Creating it with table content.")
-            # with open(README_FILE, 'w', encoding='utf-8') as f:
-            #    f.write(f"{START_MARKER}\n{table_content}\n{END_MARKER}\n")
-            # return
-            exit(1)
-
+            # اگر README وجود ندارد، یک README جدید با نشانگرها و جدول ایجاد می‌کنیم
+            print(f"{README_FILE} not found. Creating it with table content and markers.")
+            with open(README_FILE, 'w', encoding='utf-8') as f:
+                f.write(f"# رهیاب نسخه‌ها\n\nلیست آخرین نسخه‌های مخازن مورد نظر:\n\n")
+                f.write(f"{START_MARKER}\n{table_content}\n{END_MARKER}\n\n")
+                f.write("این مخزن به صورت خودکار به‌روز می‌شود.\n")
+            print(f"✅ {README_FILE} created and updated successfully.")
+            return
 
         with open(README_FILE, 'r', encoding='utf-8') as f:
             readme_content = f.read()
@@ -51,13 +49,12 @@ def update_readme_with_regex():
         # Check if the pattern (markers) exists in the README
         if not pattern.search(readme_content):
             print(f"Warning: Markers '{START_MARKER}' and '{END_MARKER}' not found in {README_FILE}.")
-            # اگر نشانگرها یافت نشدند، می‌توانید محتوای جدول را به انتهای فایل اضافه کنید
-            # یا یک پیام خطا نمایش دهید. در اینجا ما آن را به انتهای فایل اضافه می‌کنیم.
-            print(f"Appending table to the end of {README_FILE} as markers were not found.")
+            print(f"Appending table with markers to the end of {README_FILE}.")
             # Ensure there's a newline before appending if the file doesn't end with one
             if readme_content and not readme_content.endswith('\n'):
                 readme_content += '\n'
-            new_readme_content = f"{readme_content}{START_MARKER}\n{table_content}\n{END_MARKER}\n"
+            # اضافه کردن محتوا همراه با نشانگرها اگر نشانگرها وجود نداشتند
+            new_readme_content = f"{readme_content}\n{START_MARKER}\n{table_content}\n{END_MARKER}\n"
         else:
             # Define the new block content, including markers, to replace the old block
             replacement = f"{START_MARKER}\n{table_content}\n{END_MARKER}"
@@ -65,11 +62,14 @@ def update_readme_with_regex():
             new_readme_content, num_replacements = pattern.subn(replacement, readme_content, count=1)
 
             if num_replacements == 0:
-                # این حالت نباید اتفاق بیفتد اگر pattern.search() موفق بوده باشد
-                print(f"Error: Could not perform replacement even though markers were found. This is unexpected.")
-                exit(1)
+                # این حالت نباید اتفاق بیفتد اگر pattern.search() موفق بوده باشد و نشانگرها خالی نباشند
+                print(f"Error: Could not perform replacement even though markers were searched. This is unexpected if markers are defined and present.")
+                # اگر نشانگرها در فایل هستند اما جایگزینی انجام نمی‌شود، ممکن است مشکلی در الگوی regex یا محتوای فایل README باشد
+                # به عنوان یک راه حل موقت، می‌توانیم به انتهای فایل اضافه کنیم، اما بهتر است مشکل اصلی بررسی شود.
+                # new_readme_content = f"{readme_content}\n{START_MARKER}\n{table_content}\n{END_MARKER}\n" # Fallback
+                # print("Falling back to appending content due to replacement failure.")
+                exit(1) # یا خروج با خطا برای بررسی بیشتر
             elif num_replacements > 1:
-                 # این هم نباید با count=1 اتفاق بیفتد
                 print(f"Warning: Replaced more than one block. Check your README for duplicate marker sets.")
 
         # Write the updated content back to README
@@ -81,7 +81,7 @@ def update_readme_with_regex():
 
     except FileNotFoundError:
         # این مورد باید توسط بررسی‌های os.path.exists در بالا گرفته شود
-        print(f"Error: A file was not found during the process.")
+        print(f"Error: A file was not found during the process (should have been caught earlier).")
         exit(1)
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
