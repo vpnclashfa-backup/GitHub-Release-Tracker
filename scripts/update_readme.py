@@ -4,68 +4,58 @@ import os
 # --- Configuration ---
 TABLE_FILE = 'releases_content.md'
 README_FILE = 'README.md'
-# --- *** این خطوط تغییر کرده اند *** ---
 START_MARKER = ''
 END_MARKER = ''
 # -------------------
 
-def update_readme_line_by_line():
-    """Reads the generated table and updates the README.md file line by line,
-       replacing content between (and including) specified markers."""
-    print(f"Starting README update (line-by-line method)...")
-    print(f"Using START_MARKER: '{START_MARKER}'")
-    print(f"Using END_MARKER: '{END_MARKER}'")
-
+def update_readme_with_regex():
+    """Reads the generated table and updates the README.md file using regex
+       to replace content between markers, preventing repetition."""
+    print(f"Starting README update using regex...")
     try:
         # Read the generated table content
         print(f"Reading table from {TABLE_FILE}...")
         with open(TABLE_FILE, 'r', encoding='utf-8') as f:
-            table_content = f.read().strip() # The content to insert
+            table_content = f.read().strip()
 
-        # Read the current README lines
+        # Read the current README content
         print(f"Reading {README_FILE}...")
         with open(README_FILE, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
+            readme_content = f.read()
 
-        new_lines = []
-        in_block_to_replace = False
-        block_written = False
-        start_marker_found = False
+        # Escape markers for regex, just in case (though unlikely needed for comments)
+        start = re.escape(START_MARKER)
+        end = re.escape(END_MARKER)
 
-        for line in lines:
-            stripped_line = line.strip()
+        # Build the regex to find content between markers (inclusive)
+        # Use re.DOTALL (s) to make '.' match newlines
+        pattern = re.compile(f"({start})(.*?)({end})", re.DOTALL)
 
-            if stripped_line == START_MARKER:
-                print(f"Found START_MARKER: '{START_MARKER}'")
-                new_lines.append(START_MARKER + '\n') # Keep the start marker
-                new_lines.append(table_content + '\n') # Add the new table content
-                block_written = True
-                in_block_to_replace = True
-                start_marker_found = True
-            elif stripped_line == END_MARKER:
-                print(f"Found END_MARKER: '{END_MARKER}'")
-                if not start_marker_found:
-                    print(f"Warning: END_MARKER found before START_MARKER. Keeping original END_MARKER.")
-                    new_lines.append(line)
-                else:
-                    new_lines.append(END_MARKER + '\n') # Keep/Add the end marker
-                    in_block_to_replace = False
-            elif not in_block_to_replace:
-                new_lines.append(line) # Keep lines outside the block
-            else:
-                # Inside the block to replace, so skip this original line
-                print(f"Skipping line inside old block: {line.strip()}")
-
-
-        if not block_written:
-            print(f"Error: START_MARKER ('{START_MARKER}') not found in {README_FILE}.")
-            print(f"Table content could not be inserted. Please ensure markers exist in {README_FILE}.")
+        # Check if the pattern exists at least once
+        if not pattern.search(readme_content):
+            print(f"Error: Markers '{START_MARKER}' and '{END_MARKER}' not found or not in correct order in {README_FILE}.")
+            print("Cannot update README. Please ensure the markers exist and are correctly placed.")
             exit(1)
+
+        # Define the new block content, including markers
+        replacement = f"{START_MARKER}\n{table_content}\n{END_MARKER}"
+
+        # Use re.sub to replace the *first occurrence* of the block.
+        # This prevents issues if multiple blocks accidentally exist.
+        new_readme_content, num_replacements = pattern.subn(replacement, readme_content, count=1)
+
+        if num_replacements == 0:
+            print(f"Error: Could not perform replacement. Markers might be present but pattern failed.")
+            exit(1)
+        elif num_replacements > 1:
+            # This shouldn't happen with count=1, but as a safeguard.
+            print(f"Warning: Replaced more than one block. Check your README for duplicate markers.")
+
 
         # Write the updated content back to README
         print(f"Writing updated content to {README_FILE}...")
         with open(README_FILE, 'w', encoding='utf-8') as f:
-            f.writelines(new_lines)
+            f.write(new_readme_content)
 
         print(f"✅ {README_FILE} updated successfully.")
 
@@ -81,5 +71,6 @@ def update_readme_line_by_line():
             print(f"Cleaning up {TABLE_FILE}...")
             os.remove(TABLE_FILE)
 
+# Ensure the main function is called
 if __name__ == "__main__":
-    update_readme_line_by_line()
+    update_readme_with_regex()
