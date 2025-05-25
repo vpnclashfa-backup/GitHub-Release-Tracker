@@ -22,6 +22,7 @@ jobs:
           if [ ! -f repositories.txt ]; then
             echo "https://github.com/actions/checkout" > repositories.txt
             echo "https://github.com/cli/cli" >> repositories.txt
+            echo "https://github.com/ImranR98/Obtainium" >> repositories.txt
             echo "https://github.com/vpnclashfa-backup/telegram-auto-release" >> repositories.txt
           fi
           if [ ! -f README.md ]; then
@@ -30,11 +31,12 @@ jobs:
             echo "لیست آخرین نسخه‌های مخازن مورد نظر:" >> README.md
             echo "" >> README.md
             echo "" >> README.md
+            echo "محتوای جدول در اینجا توسط اسکریپت قرار خواهد گرفت." >> README.md # Placeholder
             echo "" >> README.md
             echo "" >> README.md
             echo "این مخزن به صورت خودکار به‌روز می‌شود." >> README.md
           fi
-          # بررسی وجود فایل پایتون
+          # بررسی وجود فایل پایتون (مطمئن شوید این فایل وجود دارد)
           if [ ! -f scripts/update_readme.py ]; then
             echo "##### IMPORTANT: You need to ensure scripts/update_readme.py exists! #####"
             exit 1
@@ -62,53 +64,66 @@ jobs:
             if [ -z "$repo_url" ]; then continue; fi
             repo_path=$(echo "$repo_url" | sed -E 's|https?://github.com/||' | sed 's/\.git$//' | sed 's/\/$//')
             repo_name_raw="${repo_path##*/}"
-            repo_name_clean=$(echo "$repo_name_raw" | tr -d '_') # <--- **خط جدید: حذف '_' از نام**
+            # --- *** این خط تغییر کرده است *** ---
+            repo_name_clean=$(echo "$repo_name_raw" | sed 's/-/ /g; s/_/ /g') # جایگزینی '-' و '_' با فاصله
             echo "Processing $repo_path..."
-            repo_link="[$repo_name_clean]($repo_url)" # <--- **تغییر: استفاده از نام بدون '_'**
+            repo_link="[$repo_name_clean]($repo_url)" 
 
             # --- دریافت آخرین نسخه ---
-            release_data=$(gh api repos/$repo_path/releases/latest --jq '{tagName: .tag_name, url: .html_url}' 2>/dev/null) || true
-            if [ -z "$release_data" ] || [ "$(echo "$release_data" | jq -r '.tagName')" == "null" ]; then
+            release_data=$(gh api "repos/$repo_path/releases/latest" --jq '{tagName: .tag_name, url: .html_url}' 2>/dev/null) || true
+            
+            tag_name_raw=""
+            release_url_raw=""
+
+            if [ -n "$release_data" ] && [ "$(echo "$release_data" | jq -r '.tagName')" != "null" ]; then
+              tag_name_raw=$(echo "$release_data" | jq -r '.tagName')
+              release_url_raw=$(echo "$release_data" | jq -r '.url')
+            fi
+
+            if [ -z "$tag_name_raw" ] || [ "$tag_name_raw" == "null" ]; then
               tag_name="پیدا نشد"
-              release_url="#"
+              release_url="#" # Link to '#' if not found
             else
-              tag_name=$(echo "$release_data" | jq -r '.tagName')
-              release_url=$(echo "$release_data" | jq -r '.url')
+              tag_name="$tag_name_raw"
+              release_url="$release_url_raw"
               echo "  -> Found release: $tag_name"
             fi
 
             # --- بررسی شرط جدید و جستجو برای منبع ---
+            source_content="یافت نشد" # Default value
             if [ "$repo_path" == "$TELEGRAM_REPO" ]; then
               source_content="[لینک منبع]($TELEGRAM_DOWNLOAD_URL)"
               echo "  -> Special handling for $repo_path."
             else
-              source_content="یافت نشد"
               source_url_main="https://raw.githubusercontent.com/$repo_path/main/$URLS_FILENAME"
               source_url_master="https://raw.githubusercontent.com/$repo_path/master/$URLS_FILENAME"
               TMP_URL_FILE="tmp_url.txt"
               fetched_url=""
+              
               http_code_main=$(curl -sSL "$source_url_main" -o $TMP_URL_FILE -w "%{http_code}")
               if [ "$http_code_main" -eq 200 ]; then
-                  fetched_url=$(cat $TMP_URL_FILE)
+                fetched_url=$(cat $TMP_URL_FILE)
               else
-                  http_code_master=$(curl -sSL "$source_url_master" -o $TMP_URL_FILE -w "%{http_code}")
-                  if [ "$http_code_master" -eq 200 ]; then
-                      fetched_url=$(cat $TMP_URL_FILE)
-                  fi
+                http_code_master=$(curl -sSL "$source_url_master" -o $TMP_URL_FILE -w "%{http_code}")
+                if [ "$http_code_master" -eq 200 ]; then
+                  fetched_url=$(cat $TMP_URL_FILE)
+                fi
               fi
               rm -f $TMP_URL_FILE
+
               if [ -n "$fetched_url" ]; then
-                  first_line_url=$(echo "$fetched_url" | head -n 1 | tr -d '[:space:]')
-                  if [ -n "$first_line_url" ]; then
-                      source_content="[لینک منبع]($first_line_url)"
-                  else
-                      source_content="فایل منبع خالی"
-                  fi
+                first_line_url=$(echo "$fetched_url" | head -n 1 | tr -d '[:space:]')
+                if [ -n "$first_line_url" ]; then
+                  source_content="[لینک منبع]($first_line_url)"
+                else
+                  source_content="فایل منبع خالی"
+                fi
               else
-                  echo "  -> No $URLS_FILENAME found for $repo_path."
+                echo "  -> No $URLS_FILENAME found for $repo_path."
               fi
             fi
-            echo "| $repo_link | **$tag_name** | [مشاهده]($release_url) | $source_content |" >> $TEMP_OUTPUT
+            # --- *** این خط تغییر کرده است *** ---
+            echo "| $repo_link | [**$tag_name**]($release_url) | [مشاهده]($release_url) | $source_content |" >> $TEMP_OUTPUT
           done < "$REPO_LIST_FILE"
 
           echo "" >> $TEMP_OUTPUT
