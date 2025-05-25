@@ -114,7 +114,8 @@ jobs:
               echo "  -> [DEBUG] Fetched content (raw): '$fetched_url'" # *** DEBUG LINE ***
 
               if [ -n "$fetched_url" ]; then
-                first_line_url=$(echo "$fetched_url" | head -n 1 | tr -d '[:space:]')
+                # --- *** این خط تغییر کرده است (برای حذف BOM) *** ---
+                first_line_url=$(echo "$fetched_url" | head -n 1 | sed 's/^\xEF\xBB\xBF//' | tr -d '[:space:]')
                 echo "  -> [DEBUG] First line URL (cleaned): '$first_line_url'" # *** DEBUG LINE ***
                 if [ -n "$first_line_url" ]; then
                   source_content="[لینک منبع]($first_line_url)"
