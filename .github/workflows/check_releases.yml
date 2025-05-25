@@ -1,4 +1,4 @@
-name: Check Latest Releases
+name: Check Latest Releases and Regenerate README
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # امکان اجرای دستی
 
 jobs:
-  check-releases:
+  check-and-build-readme:
     runs-on: ubuntu-latest
     permissions:
       contents: write # نیاز به دسترسی برای کامیت
@@ -16,82 +16,56 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Create initial files (if they don't exist)
+      - name: Create initial and template files (if they don't exist)
         run: |
-          mkdir -p scripts # اطمینان از وجود پوشه scripts در ریشه
+          mkdir -p scripts # اطمینان از وجود پوشه scripts
+          mkdir -p templates # اطمینان از وجود پوشه templates
+
           if [ ! -f repositories.txt ]; then
+            echo "Creating default repositories.txt..."
             echo "https://github.com/actions/checkout" > repositories.txt
             echo "https://github.com/cli/cli" >> repositories.txt
             echo "https://github.com/ImranR98/Obtainium" >> repositories.txt
             echo "https://github.com/vpnclashfa-backup/telegram-auto-release" >> repositories.txt
           fi
-          
-          # تعریف نشانگرها برای استفاده در شل اسکریپت
-          # اینها باید با مقادیر داخل اسکریپت پایتون یکسان باشند
-          ACTUAL_START_MARKER=""
-          ACTUAL_END_MARKER=""
 
-          # ایجاد README.md اولیه با نشانگرها در صورت عدم وجود
-          if [ ! -f README.md ]; then
-            echo "Creating initial README.md with markers..."
-            echo "# رهیاب نسخه‌ها" > README.md
-            echo "" >> README.md
-            echo "لیست آخرین نسخه‌های مخازن مورد نظر:" >> README.md
-            echo "" >> README.md
-            echo "$ACTUAL_START_MARKER" >> README.md # استفاده از نشانگر واقعی
-            echo "محتوای جدول در اینجا توسط اسکریپت قرار خواهد گرفت." >> README.md 
-            echo "$ACTUAL_END_MARKER" >> README.md   # استفاده از نشانگر واقعی
-            echo "" >> README.md
-            echo "این مخزن به صورت خودکار به‌روز می‌شود." >> README.md
-            echo "README.md created with markers."
-          else
-            echo "README.md already exists."
-            # بررسی وجود نشانگرها در فایل README.md موجود
-            # برای grep، کاراکترهای خاص در نشانگرها باید escape شوند تا به عنوان بخشی از الگو در نظر گرفته شوند.
-            START_MARKER_ESCAPED=$(printf '%s\n' "$ACTUAL_START_MARKER" | sed 's/[][\.|$()*+?{}^]/\\&/g')
-            END_MARKER_ESCAPED=$(printf '%s\n' "$ACTUAL_END_MARKER" | sed 's/[][\.|$()*+?{}^]/\\&/g')
-
-            if ! grep -q "$START_MARKER_ESCAPED" README.md || ! grep -q "$END_MARKER_ESCAPED" README.md; then
-              echo "Warning: Markers are missing in the existing README.md!"
-              echo "The Python script will attempt to append the table, which might lead to duplication if old content isn't manually removed or markers added."
-              echo "Please ensure your README.md contains these lines:"
-              echo "$ACTUAL_START_MARKER" 
-              echo "$ACTUAL_END_MARKER"   
-              echo "with the content to be replaced between them."
-              # به صورت اختیاری: می‌توانید در اینجا فایل را با نشانگرها بازنویسی کنید اگر وجود ندارند
-              # echo "Attempting to add markers to existing README.md..."
-              # (این بخش می‌تواند پیچیده باشد اگر بخواهیم محتوای موجود را حفظ کنیم)
-            fi
+          if [ ! -f templates/readme_header.md ]; then
+            echo "Creating default templates/readme_header.md..."
+            echo "# رهیاب نسخه‌ها" > templates/readme_header.md
+            echo "" >> templates/readme_header.md
+            echo "لیست آخرین نسخه‌های مخازن مورد نظر:" >> templates/readme_header.md
+            echo "" >> templates/readme_header.md
           fi
 
-          # بررسی وجود فایل پایتون
-          if [ ! -f scripts/update_readme.py ]; then
-            echo "##### CRITICAL: Python script scripts/update_readme.py not found! #####"
-            exit 1
+          if [ ! -f templates/readme_footer.md ]; then
+            echo "Creating default templates/readme_footer.md..."
+            echo "" >> templates/readme_footer.md # یک خط خالی برای جداسازی بهتر
+            echo "---" >> templates/readme_footer.md
+            echo "**نکته:** برای راحت‌تر به‌روز کردن اپلیکیشن‌های اندروید ، لینک هر مخزن را در اپلیکیشن [Obtainium](https://github.com/ImranR98/Obtainium) وارد کنید." >> templates/readme_footer.md
+            echo "" >> templates/readme_footer.md
+            echo "این مخزن به صورت خودکار به‌روز می‌شود." >> templates/readme_footer.md
           fi
         shell: bash
 
-      - name: Check for Latest Releases and Generate Table
-        id: check_releases
+      - name: Check for Latest Releases and Generate Table Content
+        id: generate_table
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          set -e # Exit immediately if a command exits with a non-zero status.
-          TEMP_OUTPUT="releases_content.md"
+          set -e 
+          TEMP_TABLE_OUTPUT="releases_content.md" # فایل موقت برای محتوای جدول
           REPO_LIST_FILE="repositories.txt"
-          URLS_FILENAME="urls_to_check.txt" # نام فایل حاوی URL های منبع
+          URLS_FILENAME="urls_to_check.txt"
           TELEGRAM_REPO="vpnclashfa-backup/telegram-auto-release"
           TELEGRAM_DOWNLOAD_URL="https://telegram.org/apps"
 
-          # اطمینان از اینکه فایل موقت خالی است یا ایجاد می‌شود
-          # این دستور فایل را خالی می‌کند یا اگر وجود نداشته باشد، آن را ایجاد می‌کند
-          > "$TEMP_OUTPUT"
+          # اطمینان از اینکه فایل موقت جدول خالی است یا ایجاد می‌شود
+          > "$TEMP_TABLE_OUTPUT"
 
-          echo "**آخرین بررسی:** $(date -u '+%Y-%m-%d %H:%M:%S') UTC" >> "$TEMP_OUTPUT"
-          echo "" >> "$TEMP_OUTPUT"
-          # حذف ستون "لینک نسخه" از هدر
-          echo "| لینک مخزن | آخرین نسخه | منبع |" >> "$TEMP_OUTPUT"
-          echo "|---|---|---|" >> "$TEMP_OUTPUT"
+          echo "**آخرین بررسی:** $(date -u '+%Y-%m-%d %H:%M:%S') UTC" >> "$TEMP_TABLE_OUTPUT"
+          echo "" >> "$TEMP_TABLE_OUTPUT"
+          echo "| لینک مخزن | آخرین نسخه | منبع |" >> "$TEMP_TABLE_OUTPUT"
+          echo "|---|---|---|" >> "$TEMP_TABLE_OUTPUT"
 
           if [ ! -f "$REPO_LIST_FILE" ]; then
             echo "Error: $REPO_LIST_FILE not found!"
@@ -99,93 +73,101 @@ jobs:
           fi
 
           while IFS= read -r repo_url || [[ -n "$repo_url" ]]; do
-            # حذف کاراکترهای بازگشت به ابتدای خط (CR) و فضاهای خالی ابتدا و انتها
             repo_url_cleaned=$(echo "$repo_url" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//') 
             if [ -z "$repo_url_cleaned" ]; then continue; fi
 
             repo_path=$(echo "$repo_url_cleaned" | sed -E 's|https?://github.com/||' | sed 's/\.git$//' | sed 's/\/$//')
             repo_name_raw="${repo_path##*/}"
-            # جایگزینی '-' و '_' با فاصله و تبدیل به حروف بزرگ برای اولین حرف هر کلمه
             repo_name_clean=$(echo "$repo_name_raw" | sed 's/-/ /g; s/_/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2); print}')
             repo_link="[$repo_name_clean]($repo_url_cleaned)"
 
             echo "Processing $repo_path..."
-            # فقط tag_name و html_url را از API دریافت می‌کنیم چون فقط به آن‌ها نیاز داریم
             release_data=$(gh api "repos/$repo_path/releases/latest" --jq '{tagName: .tag_name, url: .html_url}' 2>/dev/null) || true
             
             tag_name_raw=""
-            release_html_url_raw="" # این همان لینکی است که برای مشاهده نسخه استفاده می‌شود
+            release_html_url_raw=""
 
             if [ -n "$release_data" ] && [ "$(echo "$release_data" | jq -r '.tagName')" != "null" ]; then
               tag_name_raw=$(echo "$release_data" | jq -r '.tagName')
-              release_html_url_raw=$(echo "$release_data" | jq -r '.url') # لینک صفحه ریلیز
+              release_html_url_raw=$(echo "$release_data" | jq -r '.url')
             fi
 
             if [ -z "$tag_name_raw" ] || [ "$tag_name_raw" == "null" ]; then
               tag_name_display="پیدا نشد"
-              # لینک به خود مخزن اگر نسخه خاصی پیدا نشد
               release_link_display="[$tag_name_display]($repo_url_cleaned)" 
             else
               tag_name_display="$tag_name_raw"
-              # لینک به صفحه ریلیز با نام تگ به عنوان متن لینک
               release_link_display="[**$tag_name_display**]($release_html_url_raw)" 
               echo "  -> Found release: $tag_name_display, URL: $release_html_url_raw"
             fi
 
-            source_content_link="یافت نشد" # مقدار پیش‌فرض
+            source_content_link="یافت نشد"
             if [ "$repo_path" == "$TELEGRAM_REPO" ]; then
               source_content_link="[مشاهده]($TELEGRAM_DOWNLOAD_URL)"
               echo "  -> Special handling for $repo_path. Source: Telegram Site"
             else
               source_url_main="https://raw.githubusercontent.com/$repo_path/main/$URLS_FILENAME"
               source_url_master="https://raw.githubusercontent.com/$repo_path/master/$URLS_FILENAME"
-              TMP_URL_FILE_FOR_SOURCE="tmp_source_url_content.txt" # نام فایل موقت متفاوت برای جلوگیری از تداخل
+              TMP_URL_FILE_FOR_SOURCE="tmp_source_url_content.txt"
               fetched_url_content=""
               
-              # تلاش برای خواندن از main
               http_code_main=$(curl --silent --show-error --location --output "$TMP_URL_FILE_FOR_SOURCE" --write-out "%{http_code}" "$source_url_main")
               if [ "$http_code_main" -eq 200 ]; then
                 fetched_url_content=$(cat "$TMP_URL_FILE_FOR_SOURCE")
               else
-                echo "  -> Failed to fetch from main branch for $repo_path (HTTP: $http_code_main). Trying master..."
-                # تلاش برای خواندن از master اگر main موفق نبود
+                # echo "  -> Failed to fetch from main branch for $repo_path (HTTP: $http_code_main). Trying master..."
                 http_code_master=$(curl --silent --show-error --location --output "$TMP_URL_FILE_FOR_SOURCE" --write-out "%{http_code}" "$source_url_master")
                 if [ "$http_code_master" -eq 200 ]; then
                   fetched_url_content=$(cat "$TMP_URL_FILE_FOR_SOURCE")
-                else
-                  echo "  -> Failed to fetch from master branch for $repo_path (HTTP: $http_code_master)."
+                # else
+                  # echo "  -> Failed to fetch from master branch for $repo_path (HTTP: $http_code_master)."
                 fi
               fi
-              rm -f "$TMP_URL_FILE_FOR_SOURCE" # حذف فایل موقت
+              rm -f "$TMP_URL_FILE_FOR_SOURCE"
 
               if [ -n "$fetched_url_content" ]; then
-                # حذف BOM و فضای خالی و گرفتن اولین خط
                 first_line_url=$(echo "$fetched_url_content" | sed '1q' | sed 's/^\xEF\xBB\xBF//' | tr -d '[:space:]')
                 if [ -n "$first_line_url" ]; then
                   source_content_link="[مشاهده]($first_line_url)"
-                  echo "  -> Source URL found in $URLS_FILENAME: $first_line_url"
+                  # echo "  -> Source URL found in $URLS_FILENAME: $first_line_url"
                 else
                   source_content_link="فایل منبع خالی"
-                  echo "  -> $URLS_FILENAME found but was empty or first line was blank."
+                  # echo "  -> $URLS_FILENAME found but was empty or first line was blank."
                 fi
               else
-                echo "  -> No $URLS_FILENAME found or accessible for $repo_path."
-                source_content_link="یافت نشد" # اطمینان از مقداردهی
+                # echo "  -> No $URLS_FILENAME found or accessible for $repo_path."
+                source_content_link="یافت نشد"
               fi
             fi
-            # حذف ستون "لینک نسخه" از ردیف داده
-            echo "| $repo_link | $release_link_display | $source_content_link |" >> "$TEMP_OUTPUT"
+            echo "| $repo_link | $release_link_display | $source_content_link |" >> "$TEMP_TABLE_OUTPUT"
           done < "$REPO_LIST_FILE"
-
-          echo "" >> "$TEMP_OUTPUT"
-          echo "---" >> "$TEMP_OUTPUT"
-          echo "**نکته:** برای راحت‌تر به‌روز کردن اپلیکیشن‌های اندروید ، لینک هر مخزن را در اپلیکیشن [Obtainium](https://github.com/ImranR98/Obtainium) وارد کنید." >> "$TEMP_OUTPUT"
-
-          echo "✅ Table content generated into $TEMP_OUTPUT."
+          echo "✅ Table content generated into $TEMP_TABLE_OUTPUT."
         shell: bash
 
-      - name: Update README.md using Python script
-        run: python scripts/update_readme.py
+      - name: Build README.md from templates and table content
+        run: |
+          # اطمینان از وجود فایل‌های الگو و جدول
+          if [ ! -f templates/readme_header.md ]; then
+            echo "Error: templates/readme_header.md not found!"
+            exit 1
+          fi
+          if [ ! -f releases_content.md ]; then
+            echo "Error: releases_content.md not found (table content)!"
+            exit 1
+          fi
+          if [ ! -f templates/readme_footer.md ]; then
+            echo "Error: templates/readme_footer.md not found!"
+            exit 1
+          fi
+
+          # بازنویسی کامل README.md
+          echo "Building README.md..."
+          cat templates/readme_header.md releases_content.md templates/readme_footer.md > README.md
+          echo "✅ README.md built successfully."
+
+          # پاک کردن فایل موقت جدول
+          rm -f releases_content.md
+          echo "Cleaned up releases_content.md."
         shell: bash
 
       - name: Commit and push changes
@@ -193,11 +175,10 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add README.md
-          # بررسی اینکه آیا تغییراتی برای کامیت وجود دارد یا خیر
           if git diff --staged --quiet; then
             echo "No changes to commit in README.md."
           else
-            git commit -m "chore: به‌روزرسانی لیست آخرین نسخه‌ها و اصلاح ساختار جدول"
+            git commit -m "docs: بازسازی README.md با آخرین نسخه‌ها"
             git push
             echo "README.md committed and pushed."
           fi
