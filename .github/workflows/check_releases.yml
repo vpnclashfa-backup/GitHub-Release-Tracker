@@ -26,6 +26,11 @@ jobs:
             echo "https://github.com/vpnclashfa-backup/telegram-auto-release" >> repositories.txt
           fi
           
+          # تعریف نشانگرها برای استفاده در شل اسکریپت
+          # اینها باید با مقادیر داخل اسکریپت پایتون یکسان باشند
+          ACTUAL_START_MARKER=""
+          ACTUAL_END_MARKER=""
+
           # ایجاد README.md اولیه با نشانگرها در صورت عدم وجود
           if [ ! -f README.md ]; then
             echo "Creating initial README.md with markers..."
@@ -33,22 +38,29 @@ jobs:
             echo "" >> README.md
             echo "لیست آخرین نسخه‌های مخازن مورد نظر:" >> README.md
             echo "" >> README.md
-            echo "" >> README.md # نشانگر شروع اضافه شد
+            echo "$ACTUAL_START_MARKER" >> README.md # استفاده از نشانگر واقعی
             echo "محتوای جدول در اینجا توسط اسکریپت قرار خواهد گرفت." >> README.md 
-            echo "" >> README.md   # نشانگر پایان اضافه شد
+            echo "$ACTUAL_END_MARKER" >> README.md   # استفاده از نشانگر واقعی
             echo "" >> README.md
             echo "این مخزن به صورت خودکار به‌روز می‌شود." >> README.md
             echo "README.md created with markers."
           else
             echo "README.md already exists."
             # بررسی وجود نشانگرها در فایل README.md موجود
-            if ! grep -q "" README.md || ! grep -q "" README.md; then
+            # برای grep، کاراکترهای خاص در نشانگرها باید escape شوند تا به عنوان بخشی از الگو در نظر گرفته شوند.
+            START_MARKER_ESCAPED=$(printf '%s\n' "$ACTUAL_START_MARKER" | sed 's/[][\.|$()*+?{}^]/\\&/g')
+            END_MARKER_ESCAPED=$(printf '%s\n' "$ACTUAL_END_MARKER" | sed 's/[][\.|$()*+?{}^]/\\&/g')
+
+            if ! grep -q "$START_MARKER_ESCAPED" README.md || ! grep -q "$END_MARKER_ESCAPED" README.md; then
               echo "Warning: Markers are missing in the existing README.md!"
               echo "The Python script will attempt to append the table, which might lead to duplication if old content isn't manually removed or markers added."
               echo "Please ensure your README.md contains these lines:"
-              echo ""
-              echo ""
+              echo "$ACTUAL_START_MARKER" 
+              echo "$ACTUAL_END_MARKER"   
               echo "with the content to be replaced between them."
+              # به صورت اختیاری: می‌توانید در اینجا فایل را با نشانگرها بازنویسی کنید اگر وجود ندارند
+              # echo "Attempting to add markers to existing README.md..."
+              # (این بخش می‌تواند پیچیده باشد اگر بخواهیم محتوای موجود را حفظ کنیم)
             fi
           fi
 
@@ -67,7 +79,7 @@ jobs:
           set -e # Exit immediately if a command exits with a non-zero status.
           TEMP_OUTPUT="releases_content.md"
           REPO_LIST_FILE="repositories.txt"
-          URLS_FILENAME="urls_to_check.txt"
+          URLS_FILENAME="urls_to_check.txt" # نام فایل حاوی URL های منبع
           TELEGRAM_REPO="vpnclashfa-backup/telegram-auto-release"
           TELEGRAM_DOWNLOAD_URL="https://telegram.org/apps"
 
@@ -130,16 +142,21 @@ jobs:
               TMP_URL_FILE_FOR_SOURCE="tmp_source_url_content.txt" # نام فایل موقت متفاوت برای جلوگیری از تداخل
               fetched_url_content=""
               
-              http_code_main=$(curl --silent --location --output "$TMP_URL_FILE_FOR_SOURCE" --write-out "%{http_code}" "$source_url_main")
+              # تلاش برای خواندن از main
+              http_code_main=$(curl --silent --show-error --location --output "$TMP_URL_FILE_FOR_SOURCE" --write-out "%{http_code}" "$source_url_main")
               if [ "$http_code_main" -eq 200 ]; then
                 fetched_url_content=$(cat "$TMP_URL_FILE_FOR_SOURCE")
               else
-                http_code_master=$(curl --silent --location --output "$TMP_URL_FILE_FOR_SOURCE" --write-out "%{http_code}" "$source_url_master")
+                echo "  -> Failed to fetch from main branch for $repo_path (HTTP: $http_code_main). Trying master..."
+                # تلاش برای خواندن از master اگر main موفق نبود
+                http_code_master=$(curl --silent --show-error --location --output "$TMP_URL_FILE_FOR_SOURCE" --write-out "%{http_code}" "$source_url_master")
                 if [ "$http_code_master" -eq 200 ]; then
                   fetched_url_content=$(cat "$TMP_URL_FILE_FOR_SOURCE")
+                else
+                  echo "  -> Failed to fetch from master branch for $repo_path (HTTP: $http_code_master)."
                 fi
               fi
-              rm -f "$TMP_URL_FILE_FOR_SOURCE"
+              rm -f "$TMP_URL_FILE_FOR_SOURCE" # حذف فایل موقت
 
               if [ -n "$fetched_url_content" ]; then
                 # حذف BOM و فضای خالی و گرفتن اولین خط
@@ -153,7 +170,7 @@ jobs:
                 fi
               else
                 echo "  -> No $URLS_FILENAME found or accessible for $repo_path."
-                source_content_link="یافت نشد"
+                source_content_link="یافت نشد" # اطمینان از مقداردهی
               fi
             fi
             # حذف ستون "لینک نسخه" از ردیف داده
