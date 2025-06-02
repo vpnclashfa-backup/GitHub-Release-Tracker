@@ -1,7 +1,7 @@
 # رهیاب نسخه‌ها
 
 لیست آخرین نسخه‌های مخازن مورد نظر:
-**آخرین بررسی:** 2025-06-01 18:48:38 UTC
+**آخرین بررسی:** 2025-06-02 18:53:21 UTC
 
 | لینک مخزن | آخرین نسخه | منبع |
 |---|---|---|
@@ -26,7 +26,7 @@
 | [D W C O N T A C T S P H O N E D I A L E R](https://github.com/vpnclashfa-backup/d_w_c_o_n_t_a_c_t_s_p_h_o_n_e_d_i_a_l_e_r) | [**updates-2025-05-26-104327**](https://github.com/vpnclashfa-backup/d_w_c_o_n_t_a_c_t_s_p_h_o_n_e_d_i_a_l_e_r/releases/tag/updates-2025-05-26-104327) | [مشاهده](https://www.farsroid.com/dw-contacts-phone-dialer/) |
 | [E S F I L E M A N A G E R](https://github.com/vpnclashfa-backup/e_s_f_i_l_e_m_a_n_a_g_e_r) | [**updates-2025-05-30-094619**](https://github.com/vpnclashfa-backup/e_s_f_i_l_e_m_a_n_a_g_e_r/releases/tag/updates-2025-05-30-094619) | [مشاهده](https://www.farsroid.com/es-file-manager/) |
 | [E S P A R A L L E L A C C O U N T S](https://github.com/vpnclashfa-backup/e_s_p_a_r_a_l_l_e_l_a_c_c_o_u_n_t_s) | [**updates-2025-05-26-104331**](https://github.com/vpnclashfa-backup/e_s_p_a_r_a_l_l_e_l_a_c_c_o_u_n_t_s/releases/tag/updates-2025-05-26-104331) | [مشاهده](https://www.farsroid.com/es-parallel-accounts/) |
-| [F A C E O V E R A N D R O I D](https://github.com/vpnclashfa-backup/f_a_c_e_o_v_e_r_a_n_d_r_o_i_d) | [**updates-2025-05-29-094933**](https://github.com/vpnclashfa-backup/f_a_c_e_o_v_e_r_a_n_d_r_o_i_d/releases/tag/updates-2025-05-29-094933) | [مشاهده](https://www.farsroid.com/face-over-android/) |
+| [F A C E O V E R A N D R O I D](https://github.com/vpnclashfa-backup/f_a_c_e_o_v_e_r_a_n_d_r_o_i_d) | [**updates-2025-06-02-095145**](https://github.com/vpnclashfa-backup/f_a_c_e_o_v_e_r_a_n_d_r_o_i_d/releases/tag/updates-2025-06-02-095145) | [مشاهده](https://www.farsroid.com/face-over-android/) |
 | [F L U C T U A T E U N I V E R S A L P R I C E T R A C K E R](https://github.com/vpnclashfa-backup/f_l_u_c_t_u_a_t_e_u_n_i_v_e_r_s_a_l_p_r_i_c_e_t_r_a_c_k_e_r) | [**updates-2025-05-26-104417**](https://github.com/vpnclashfa-backup/f_l_u_c_t_u_a_t_e_u_n_i_v_e_r_s_a_l_p_r_i_c_e_t_r_a_c_k_e_r/releases/tag/updates-2025-05-26-104417) | [مشاهده](https://www.farsroid.com/fluctuate-universal-price-tracker/) |
 | [F O T M O B P R O A N D R O I D](https://github.com/vpnclashfa-backup/f_o_t_m_o_b_p_r_o_a_n_d_r_o_i_d) | [**updates-2025-05-26-104705**](https://github.com/vpnclashfa-backup/f_o_t_m_o_b_p_r_o_a_n_d_r_o_i_d/releases/tag/updates-2025-05-26-104705) | [مشاهده](https://www.farsroid.com/fotmob-pro-android/) |
 | [F O X I T P D F E D I T O R](https://github.com/vpnclashfa-backup/f_o_x_i_t_p_d_f_e_d_i_t_o_r) | [**updates-2025-05-26-104631**](https://github.com/vpnclashfa-backup/f_o_x_i_t_p_d_f_e_d_i_t_o_r/releases/tag/updates-2025-05-26-104631) | [مشاهده](https://www.farsroid.com/foxit-pdf-editor/) |
