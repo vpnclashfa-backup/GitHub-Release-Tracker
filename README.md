@@ -1,7 +1,7 @@
 # رهیاب نسخه‌ها
 
 لیست آخرین نسخه‌های مخازن مورد نظر:
-**آخرین بررسی:** 2025-06-10 18:53:49 UTC
+**آخرین بررسی:** 2025-06-11 18:54:15 UTC
 
 | لینک مخزن | آخرین نسخه | منبع |
 |---|---|---|
@@ -44,7 +44,7 @@
 | [K I N E M A S T E R A P P A N D R O I D](https://github.com/vpnclashfa-backup/k_i_n_e_m_a_s_t_e_r_a_p_p_a_n_d_r_o_i_d) | [**updates-2025-05-30-110217**](https://github.com/vpnclashfa-backup/k_i_n_e_m_a_s_t_e_r_a_p_p_a_n_d_r_o_i_d/releases/tag/updates-2025-05-30-110217) | [مشاهده](https://www.farsroid.com/kinemaster-app-android/) |
 | [M E D I C A M E D I C A T I O N R E M I N D E R P I L L T R A C K E R](https://github.com/vpnclashfa-backup/m_e_d_i_c_a_m_e_d_i_c_a_t_i_o_n_r_e_m_i_n_d_e_r_p_i_l_l_t_r_a_c_k_e_r) | [**updates-2025-06-03-113108**](https://github.com/vpnclashfa-backup/m_e_d_i_c_a_m_e_d_i_c_a_t_i_o_n_r_e_m_i_n_d_e_r_p_i_l_l_t_r_a_c_k_e_r/releases/tag/updates-2025-06-03-113108) | [مشاهده](https://www.farsroid.com/medica-medication-reminder-pill-tracker/) |
 | [M U S I X M A T C H M U S I C L Y R I C S A N D R O I D](https://github.com/vpnclashfa-backup/m_u_s_i_x_m_a_t_c_h_m_u_s_i_c_l_y_r_i_c_s_a_n_d_r_o_i_d) | [**updates-2025-05-26-113146**](https://github.com/vpnclashfa-backup/m_u_s_i_x_m_a_t_c_h_m_u_s_i_c_l_y_r_i_c_s_a_n_d_r_o_i_d/releases/tag/updates-2025-05-26-113146) | [مشاهده](https://www.farsroid.com/musixmatch-music-lyrics-android/) |
-| [M X P L A Y E R P R O](https://github.com/vpnclashfa-backup/m_x_p_l_a_y_e_r_p_r_o) | [**updates-2025-06-10-113140**](https://github.com/vpnclashfa-backup/m_x_p_l_a_y_e_r_p_r_o/releases/tag/updates-2025-06-10-113140) | [مشاهده](https://www.farsroid.com/mx-player-pro/) |
+| [M X P L A Y E R P R O](https://github.com/vpnclashfa-backup/m_x_p_l_a_y_e_r_p_r_o) | [**updates-2025-06-11-004130**](https://github.com/vpnclashfa-backup/m_x_p_l_a_y_e_r_p_r_o/releases/tag/updates-2025-06-11-004130) | [مشاهده](https://www.farsroid.com/mx-player-pro/) |
 | [N E T M O N I T O R P R O A N D R O I D](https://github.com/vpnclashfa-backup/n_e_t_m_o_n_i_t_o_r_p_r_o_a_n_d_r_o_i_d) | [**updates-2025-05-26-113134**](https://github.com/vpnclashfa-backup/n_e_t_m_o_n_i_t_o_r_p_r_o_a_n_d_r_o_i_d/releases/tag/updates-2025-05-26-113134) | [مشاهده](https://www.farsroid.com/netmonitor-pro-android/) |
 | [N E T S H A R E A N D R O I D](https://github.com/vpnclashfa-backup/n_e_t_s_h_a_r_e_a_n_d_r_o_i_d) | [**updates-2025-05-26-113737**](https://github.com/vpnclashfa-backup/n_e_t_s_h_a_r_e_a_n_d_r_o_i_d/releases/tag/updates-2025-05-26-113737) | [مشاهده](https://www.farsroid.com/netshare-android/) |
 | [N E T W O R K A N A L Y Z E R P R O](https://github.com/vpnclashfa-backup/n_e_t_w_o_r_k_a_n_a_l_y_z_e_r_p_r_o) | [**updates-2025-05-26-113146**](https://github.com/vpnclashfa-backup/n_e_t_w_o_r_k_a_n_a_l_y_z_e_r_p_r_o/releases/tag/updates-2025-05-26-113146) | [مشاهده](https://www.farsroid.com/network-analyzer-pro/) |
