@@ -1,7 +1,7 @@
 # رهیاب نسخه‌ها
 
 لیست آخرین نسخه‌های مخازن مورد نظر:
-**آخرین بررسی:** 2025-06-30 18:43:11 UTC
+**آخرین بررسی:** 2025-07-01 18:42:41 UTC
 
 | لینک مخزن | آخرین نسخه | منبع |
 |---|---|---|
@@ -57,7 +57,7 @@
 | [P I C S A R T A N D R O I D](https://github.com/vpnclashfa-backup/p_i_c_s_a_r_t_a_n_d_r_o_i_d) | [**updates-2025-06-27-121950**](https://github.com/vpnclashfa-backup/p_i_c_s_a_r_t_a_n_d_r_o_i_d/releases/tag/updates-2025-06-27-121950) | [مشاهده](https://www.farsroid.com/picsart-android/) |
 | [P I K A C H A R G I N G S H O W](https://github.com/vpnclashfa-backup/p_i_k_a_c_h_a_r_g_i_n_g_s_h_o_w) | [**updates-2025-05-26-133703**](https://github.com/vpnclashfa-backup/p_i_k_a_c_h_a_r_g_i_n_g_s_h_o_w/releases/tag/updates-2025-05-26-133703) | [مشاهده](https://www.farsroid.com/pika-charging-show/) |
 | [P L A Y E R P R O M U S I C P L A Y E R](https://github.com/vpnclashfa-backup/p_l_a_y_e_r_p_r_o_m_u_s_i_c_p_l_a_y_e_r) | [**updates-2025-05-27-134438**](https://github.com/vpnclashfa-backup/p_l_a_y_e_r_p_r_o_m_u_s_i_c_p_l_a_y_e_r/releases/tag/updates-2025-05-27-134438) | [مشاهده](https://www.farsroid.com/playerpro-music-player/) |
-| [Q U I C K E D I T T E X T E D I T O R P R O A N D R O I D](https://github.com/vpnclashfa-backup/q_u_i_c_k_e_d_i_t_t_e_x_t_e_d_i_t_o_r_p_r_o_a_n_d_r_o_i_d) | [**updates-2025-06-15-133631**](https://github.com/vpnclashfa-backup/q_u_i_c_k_e_d_i_t_t_e_x_t_e_d_i_t_o_r_p_r_o_a_n_d_r_o_i_d/releases/tag/updates-2025-06-15-133631) | [مشاهده](https://www.farsroid.com/quickedit-text-editor-pro-android/) |
+| [Q U I C K E D I T T E X T E D I T O R P R O A N D R O I D](https://github.com/vpnclashfa-backup/q_u_i_c_k_e_d_i_t_t_e_x_t_e_d_i_t_o_r_p_r_o_a_n_d_r_o_i_d) | [**updates-2025-07-01-130223**](https://github.com/vpnclashfa-backup/q_u_i_c_k_e_d_i_t_t_e_x_t_e_d_i_t_o_r_p_r_o_a_n_d_r_o_i_d/releases/tag/updates-2025-07-01-130223) | [مشاهده](https://www.farsroid.com/quickedit-text-editor-pro-android/) |
 | [R E T O U C H R E M O V E O B J E C T S A I A R T](https://github.com/vpnclashfa-backup/r_e_t_o_u_c_h_r_e_m_o_v_e_o_b_j_e_c_t_s_a_i_a_r_t) | [**updates-2025-05-26-134255**](https://github.com/vpnclashfa-backup/r_e_t_o_u_c_h_r_e_m_o_v_e_o_b_j_e_c_t_s_a_i_a_r_t/releases/tag/updates-2025-05-26-134255) | [مشاهده](https://www.farsroid.com/retouch-remove-objects-ai-art/) |
 | [S E N D F I L E S T O T V](https://github.com/vpnclashfa-backup/s_e_n_d_f_i_l_e_s_t_o_t_v) | [**updates-2025-05-26-134236**](https://github.com/vpnclashfa-backup/s_e_n_d_f_i_l_e_s_t_o_t_v/releases/tag/updates-2025-05-26-134236) | [مشاهده](https://www.farsroid.com/send-files-to-tv/) |
 | [S H A R E I T A N D R O I D](https://github.com/vpnclashfa-backup/s_h_a_r_e_i_t_a_n_d_r_o_i_d) | [**updates-2025-06-28-130044**](https://github.com/vpnclashfa-backup/s_h_a_r_e_i_t_a_n_d_r_o_i_d/releases/tag/updates-2025-06-28-130044) | [مشاهده](https://www.farsroid.com/shareit-android/) |
