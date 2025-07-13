@@ -1,7 +1,7 @@
 # رهیاب نسخه‌ها
 
 لیست آخرین نسخه‌های مخازن مورد نظر:
-**آخرین بررسی:** 2025-07-12 18:40:30 UTC
+**آخرین بررسی:** 2025-07-13 18:40:50 UTC
 
 | لینک مخزن | آخرین نسخه | منبع |
 |---|---|---|
@@ -12,7 +12,7 @@
 | [A I A R T G E N E R A T O R](https://github.com/vpnclashfa-backup/a_i_a_r_t_g_e_n_e_r_a_t_o_r) | [**updates-2025-05-26-095851**](https://github.com/vpnclashfa-backup/a_i_a_r_t_g_e_n_e_r_a_t_o_r/releases/tag/updates-2025-05-26-095851) | [مشاهده](https://www.farsroid.com/ai-art-generator/) |
 | [A I M U S I C G E N E R A T O R S O N G W A A Z Y](https://github.com/vpnclashfa-backup/a_i_m_u_s_i_c_g_e_n_e_r_a_t_o_r_s_o_n_g_w_a_a_z_y) | [**updates-2025-05-26-095929**](https://github.com/vpnclashfa-backup/a_i_m_u_s_i_c_g_e_n_e_r_a_t_o_r_s_o_n_g_w_a_a_z_y/releases/tag/updates-2025-05-26-095929) | [مشاهده](https://www.farsroid.com/ai-music-generator-song-waazy/) |
 | [A L L T R A N S L A T O R P R O V O I C E](https://github.com/vpnclashfa-backup/a_l_l_t_r_a_n_s_l_a_t_o_r_p_r_o_v_o_i_c_e) | [**updates-2025-05-26-100046**](https://github.com/vpnclashfa-backup/a_l_l_t_r_a_n_s_l_a_t_o_r_p_r_o_v_o_i_c_e/releases/tag/updates-2025-05-26-100046) | [مشاهده](https://www.farsroid.com/all-translator-pro-voice/) |
-| [A P P C L O N E R A N D R O I D](https://github.com/vpnclashfa-backup/a_p_p_c_l_o_n_e_r_a_n_d_r_o_i_d) | [**updates-2025-06-03-085911**](https://github.com/vpnclashfa-backup/a_p_p_c_l_o_n_e_r_a_n_d_r_o_i_d/releases/tag/updates-2025-06-03-085911) | [مشاهده](https://www.farsroid.com/app-cloner-android/) |
+| [A P P C L O N E R A N D R O I D](https://github.com/vpnclashfa-backup/a_p_p_c_l_o_n_e_r_a_n_d_r_o_i_d) | [**updates-2025-07-13-084745**](https://github.com/vpnclashfa-backup/a_p_p_c_l_o_n_e_r_a_n_d_r_o_i_d/releases/tag/updates-2025-07-13-084745) | [مشاهده](https://www.farsroid.com/app-cloner-android/) |
 | [A Z S C R E E N R E C O R D E R A N D R O I D](https://github.com/vpnclashfa-backup/a_z_s_c_r_e_e_n_r_e_c_o_r_d_e_r_a_n_d_r_o_i_d) | [**updates-2025-07-09-085449**](https://github.com/vpnclashfa-backup/a_z_s_c_r_e_e_n_r_e_c_o_r_d_e_r_a_n_d_r_o_i_d/releases/tag/updates-2025-07-09-085449) | [مشاهده](https://www.farsroid.com/az-screen-recorder-android/) |
 | [B 6 2 3 P H O T O E D I T O R](https://github.com/vpnclashfa-backup/b_6_2_3_p_h_o_t_o_e_d_i_t_o_r) | [**updates-2025-05-26-010251**](https://github.com/vpnclashfa-backup/b_6_2_3_p_h_o_t_o_e_d_i_t_o_r/releases/tag/updates-2025-05-26-010251) | [مشاهده](https://www.farsroid.com/b623-photo-editor/) |
 | [C A L C T A P E S M A R T C A L C U L A T O R](https://github.com/vpnclashfa-backup/c_a_l_c_t_a_p_e_s_m_a_r_t_c_a_l_c_u_l_a_t_o_r) | [**updates-2025-05-26-100159**](https://github.com/vpnclashfa-backup/c_a_l_c_t_a_p_e_s_m_a_r_t_c_a_l_c_u_l_a_t_o_r/releases/tag/updates-2025-05-26-100159) | [مشاهده](https://www.farsroid.com/calctape-smart-calculator/) |
