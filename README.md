@@ -1,7 +1,7 @@
 # رهیاب نسخه‌ها
 
 لیست آخرین نسخه‌های مخازن مورد نظر:
-**آخرین بررسی:** 2025-07-22 18:46:37 UTC
+**آخرین بررسی:** 2025-07-23 18:46:05 UTC
 
 | لینک مخزن | آخرین نسخه | منبع |
 |---|---|---|
@@ -41,7 +41,7 @@
 | [I N T E R N E T S P E E D M E T E R A N D R O I D](https://github.com/vpnclashfa-backup/i_n_t_e_r_n_e_t_s_p_e_e_d_m_e_t_e_r_a_n_d_r_o_i_d) | [**updates-2025-05-26-105612**](https://github.com/vpnclashfa-backup/i_n_t_e_r_n_e_t_s_p_e_e_d_m_e_t_e_r_a_n_d_r_o_i_d/releases/tag/updates-2025-05-26-105612) | [مشاهده](https://www.farsroid.com/internet-speed-meter-android/) |
 | [J E F I T W O R K O U T](https://github.com/vpnclashfa-backup/j_e_f_i_t_w_o_r_k_o_u_t) | [**updates-2025-05-26-105805**](https://github.com/vpnclashfa-backup/j_e_f_i_t_w_o_r_k_o_u_t/releases/tag/updates-2025-05-26-105805) | [مشاهده](https://www.farsroid.com/jefit-workout/) |
 | [J E T A U D I O P L U S](https://github.com/vpnclashfa-backup/j_e_t_a_u_d_i_o_p_l_u_s) | [**updates-2025-07-22-105704**](https://github.com/vpnclashfa-backup/j_e_t_a_u_d_i_o_p_l_u_s/releases/tag/updates-2025-07-22-105704) | [مشاهده](https://www.farsroid.com/jetaudio-plus/) |
-| [K I N E M A S T E R A P P A N D R O I D](https://github.com/vpnclashfa-backup/k_i_n_e_m_a_s_t_e_r_a_p_p_a_n_d_r_o_i_d) | [**updates-2025-07-17-110131**](https://github.com/vpnclashfa-backup/k_i_n_e_m_a_s_t_e_r_a_p_p_a_n_d_r_o_i_d/releases/tag/updates-2025-07-17-110131) | [مشاهده](https://www.farsroid.com/kinemaster-app-android/) |
+| [K I N E M A S T E R A P P A N D R O I D](https://github.com/vpnclashfa-backup/k_i_n_e_m_a_s_t_e_r_a_p_p_a_n_d_r_o_i_d) | [**updates-2025-07-23-110108**](https://github.com/vpnclashfa-backup/k_i_n_e_m_a_s_t_e_r_a_p_p_a_n_d_r_o_i_d/releases/tag/updates-2025-07-23-110108) | [مشاهده](https://www.farsroid.com/kinemaster-app-android/) |
 | [M E D I C A M E D I C A T I O N R E M I N D E R P I L L T R A C K E R](https://github.com/vpnclashfa-backup/m_e_d_i_c_a_m_e_d_i_c_a_t_i_o_n_r_e_m_i_n_d_e_r_p_i_l_l_t_r_a_c_k_e_r) | [**updates-2025-06-30-112620**](https://github.com/vpnclashfa-backup/m_e_d_i_c_a_m_e_d_i_c_a_t_i_o_n_r_e_m_i_n_d_e_r_p_i_l_l_t_r_a_c_k_e_r/releases/tag/updates-2025-06-30-112620) | [مشاهده](https://www.farsroid.com/medica-medication-reminder-pill-tracker/) |
 | [M U S I X M A T C H M U S I C L Y R I C S A N D R O I D](https://github.com/vpnclashfa-backup/m_u_s_i_x_m_a_t_c_h_m_u_s_i_c_l_y_r_i_c_s_a_n_d_r_o_i_d) | [**updates-2025-05-26-113146**](https://github.com/vpnclashfa-backup/m_u_s_i_x_m_a_t_c_h_m_u_s_i_c_l_y_r_i_c_s_a_n_d_r_o_i_d/releases/tag/updates-2025-05-26-113146) | [مشاهده](https://www.farsroid.com/musixmatch-music-lyrics-android/) |
 | [M X P L A Y E R P R O](https://github.com/vpnclashfa-backup/m_x_p_l_a_y_e_r_p_r_o) | [**updates-2025-06-14-112802**](https://github.com/vpnclashfa-backup/m_x_p_l_a_y_e_r_p_r_o/releases/tag/updates-2025-06-14-112802) | [مشاهده](https://www.farsroid.com/mx-player-pro/) |
