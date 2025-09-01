@@ -1,11 +1,11 @@
 # رهیاب نسخه‌ها
 
 لیست آخرین نسخه‌های مخازن مورد نظر:
-**آخرین بررسی:** 2025-08-31 18:36:25 UTC
+**آخرین بررسی:** 2025-09-01 18:38:08 UTC
 
 | لینک مخزن | آخرین نسخه | منبع |
 |---|---|---|
-| [Telegram Auto Release](https://github.com/vpnclashfa-backup/telegram-auto-release) | [**telegram-updates-2025-08-05**](https://github.com/vpnclashfa-backup/telegram-auto-release/releases/tag/telegram-updates-2025-08-05) | [مشاهده](https://telegram.org/apps) |
+| [Telegram Auto Release](https://github.com/vpnclashfa-backup/telegram-auto-release) | [**telegram-updates-2025-09-01**](https://github.com/vpnclashfa-backup/telegram-auto-release/releases/tag/telegram-updates-2025-09-01) | [مشاهده](https://telegram.org/apps) |
 | [3 C T O O L B O X P R O A N D R O I D](https://github.com/vpnclashfa-backup/3_c_t_o_o_l_b_o_x_p_r_o_a_n_d_r_o_i_d) | [**updates-2025-08-30-081200**](https://github.com/vpnclashfa-backup/3_c_t_o_o_l_b_o_x_p_r_o_a_n_d_r_o_i_d/releases/tag/updates-2025-08-30-081200) | [مشاهده](https://www.farsroid.com/3c-toolbox-pro-android/) |
 | [A D O B E P H O T O S H O P L I G H T R O O M C C](https://github.com/vpnclashfa-backup/a_d_o_b_e_p_h_o_t_o_s_h_o_p_l_i_g_h_t_r_o_o_m_c_c) | [**updates-2025-05-29-085108**](https://github.com/vpnclashfa-backup/a_d_o_b_e_p_h_o_t_o_s_h_o_p_l_i_g_h_t_r_o_o_m_c_c/releases/tag/updates-2025-05-29-085108) | [مشاهده](https://www.farsroid.com/adobe-photoshop-lightroom-cc/) |
 | [A D V A N C E D D O W N L O A D M A N A G E R P R O](https://github.com/vpnclashfa-backup/a_d_v_a_n_c_e_d_d_o_w_n_l_o_a_d_m_a_n_a_g_e_r_p_r_o) | [**updates-2025-05-26-005415**](https://github.com/vpnclashfa-backup/a_d_v_a_n_c_e_d_d_o_w_n_l_o_a_d_m_a_n_a_g_e_r_p_r_o/releases/tag/updates-2025-05-26-005415) | [مشاهده](https://www.farsroid.com/advanced-download-manager-pro/) |
