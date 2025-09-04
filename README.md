@@ -1,7 +1,7 @@
 # رهیاب نسخه‌ها
 
 لیست آخرین نسخه‌های مخازن مورد نظر:
-**آخرین بررسی:** 2025-09-03 18:36:54 UTC
+**آخرین بررسی:** 2025-09-04 18:38:29 UTC
 
 | لینک مخزن | آخرین نسخه | منبع |
 |---|---|---|
@@ -60,7 +60,7 @@
 | [Q U I C K E D I T T E X T E D I T O R P R O A N D R O I D](https://github.com/vpnclashfa-backup/q_u_i_c_k_e_d_i_t_t_e_x_t_e_d_i_t_o_r_p_r_o_a_n_d_r_o_i_d) | [**updates-2025-07-16-130517**](https://github.com/vpnclashfa-backup/q_u_i_c_k_e_d_i_t_t_e_x_t_e_d_i_t_o_r_p_r_o_a_n_d_r_o_i_d/releases/tag/updates-2025-07-16-130517) | [مشاهده](https://www.farsroid.com/quickedit-text-editor-pro-android/) |
 | [R E T O U C H R E M O V E O B J E C T S A I A R T](https://github.com/vpnclashfa-backup/r_e_t_o_u_c_h_r_e_m_o_v_e_o_b_j_e_c_t_s_a_i_a_r_t) | [**updates-2025-05-26-134255**](https://github.com/vpnclashfa-backup/r_e_t_o_u_c_h_r_e_m_o_v_e_o_b_j_e_c_t_s_a_i_a_r_t/releases/tag/updates-2025-05-26-134255) | [مشاهده](https://www.farsroid.com/retouch-remove-objects-ai-art/) |
 | [S E N D F I L E S T O T V](https://github.com/vpnclashfa-backup/s_e_n_d_f_i_l_e_s_t_o_t_v) | [**updates-2025-05-26-134236**](https://github.com/vpnclashfa-backup/s_e_n_d_f_i_l_e_s_t_o_t_v/releases/tag/updates-2025-05-26-134236) | [مشاهده](https://www.farsroid.com/send-files-to-tv/) |
-| [S H A R E I T A N D R O I D](https://github.com/vpnclashfa-backup/s_h_a_r_e_i_t_a_n_d_r_o_i_d) | [**updates-2025-08-24-125934**](https://github.com/vpnclashfa-backup/s_h_a_r_e_i_t_a_n_d_r_o_i_d/releases/tag/updates-2025-08-24-125934) | [مشاهده](https://www.farsroid.com/shareit-android/) |
+| [S H A R E I T A N D R O I D](https://github.com/vpnclashfa-backup/s_h_a_r_e_i_t_a_n_d_r_o_i_d) | [**updates-2025-09-04-125826**](https://github.com/vpnclashfa-backup/s_h_a_r_e_i_t_a_n_d_r_o_i_d/releases/tag/updates-2025-09-04-125826) | [مشاهده](https://www.farsroid.com/shareit-android/) |
 | [S I G N A L S T R E N G T H A N D R O I D](https://github.com/vpnclashfa-backup/s_i_g_n_a_l_s_t_r_e_n_g_t_h_a_n_d_r_o_i_d) | [**updates-2025-07-17-132006**](https://github.com/vpnclashfa-backup/s_i_g_n_a_l_s_t_r_e_n_g_t_h_a_n_d_r_o_i_d/releases/tag/updates-2025-07-17-132006) | [مشاهده](https://www.farsroid.com/signal-strength-android/) |
 | [S N A P T U B E V I P A N D R O I D](https://github.com/vpnclashfa-backup/s_n_a_p_t_u_b_e_v_i_p_a_n_d_r_o_i_d) | [**updates-2025-08-26-131938**](https://github.com/vpnclashfa-backup/s_n_a_p_t_u_b_e_v_i_p_a_n_d_r_o_i_d/releases/tag/updates-2025-08-26-131938) | [مشاهده](https://www.farsroid.com/snaptube-vip-android/) |
 | [S O U N D H O U N D M U S I C S E A R C H](https://github.com/vpnclashfa-backup/s_o_u_n_d_h_o_u_n_d_m_u_s_i_c_s_e_a_r_c_h) | [**updates-2025-05-26-134414**](https://github.com/vpnclashfa-backup/s_o_u_n_d_h_o_u_n_d_m_u_s_i_c_s_e_a_r_c_h/releases/tag/updates-2025-05-26-134414) | [مشاهده](https://www.farsroid.com/soundhound-music-search/) |
