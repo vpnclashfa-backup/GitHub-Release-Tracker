@@ -1,7 +1,7 @@
 # رهیاب نسخه‌ها
 
 لیست آخرین نسخه‌های مخازن مورد نظر:
-**آخرین بررسی:** 2025-09-25 18:40:55 UTC
+**آخرین بررسی:** 2025-09-26 18:37:10 UTC
 
 | لینک مخزن | آخرین نسخه | منبع |
 |---|---|---|
@@ -67,7 +67,7 @@
 | [V I D E O C O N V E R T E R C O M P R E S S O R](https://github.com/vpnclashfa-backup/v_i_d_e_o_c_o_n_v_e_r_t_e_r_c_o_m_p_r_e_s_s_o_r) | [**updates-2025-09-17-132019**](https://github.com/vpnclashfa-backup/v_i_d_e_o_c_o_n_v_e_r_t_e_r_c_o_m_p_r_e_s_s_o_r/releases/tag/updates-2025-09-17-132019) | [مشاهده](https://www.farsroid.com/video-converter-compressor/) |
 | [V I V A T V A N D R O I D](https://github.com/vpnclashfa-backup/v_i_v_a_t_v_a_n_d_r_o_i_d) | [**updates-2025-05-26-134541**](https://github.com/vpnclashfa-backup/v_i_v_a_t_v_a_n_d_r_o_i_d/releases/tag/updates-2025-05-26-134541) | [مشاهده](https://www.farsroid.com/vivatv-android/) |
 | [W E A T H E R B U G E L I T E](https://github.com/vpnclashfa-backup/w_e_a_t_h_e_r_b_u_g_e_l_i_t_e) | [**updates-2025-05-26-134720**](https://github.com/vpnclashfa-backup/w_e_a_t_h_e_r_b_u_g_e_l_i_t_e/releases/tag/updates-2025-05-26-134720) | [مشاهده](https://www.farsroid.com/weatherbug-elite/) |
-| [W P S O F F I C E F U L L A N D R O I D](https://github.com/vpnclashfa-backup/w_p_s_o_f_f_i_c_e_f_u_l_l_a_n_d_r_o_i_d) | [**updates-2025-09-11-133158**](https://github.com/vpnclashfa-backup/w_p_s_o_f_f_i_c_e_f_u_l_l_a_n_d_r_o_i_d/releases/tag/updates-2025-09-11-133158) | [مشاهده](https://www.farsroid.com/wps-office-full-android/) |
+| [W P S O F F I C E F U L L A N D R O I D](https://github.com/vpnclashfa-backup/w_p_s_o_f_f_i_c_e_f_u_l_l_a_n_d_r_o_i_d) | [**updates-2025-09-26-133531**](https://github.com/vpnclashfa-backup/w_p_s_o_f_f_i_c_e_f_u_l_l_a_n_d_r_o_i_d/releases/tag/updates-2025-09-26-133531) | [مشاهده](https://www.farsroid.com/wps-office-full-android/) |
 | [Z A P Y A F O R A N D R O I D](https://github.com/vpnclashfa-backup/z_a_p_y_a_f_o_r_a_n_d_r_o_i_d) | [**updates-2025-06-27-134211**](https://github.com/vpnclashfa-backup/z_a_p_y_a_f_o_r_a_n_d_r_o_i_d/releases/tag/updates-2025-06-27-134211) | [مشاهده](https://www.farsroid.com/zapya-for-android/) |
 | [Z A R C H I V E R](https://github.com/vpnclashfa-backup/z_a_r_c_h_i_v_e_r) | [**updates-2025-05-26-135133**](https://github.com/vpnclashfa-backup/z_a_r_c_h_i_v_e_r/releases/tag/updates-2025-05-26-135133) | [مشاهده](https://www.farsroid.com/zarchiver/) |
 ---
