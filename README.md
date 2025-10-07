@@ -1,7 +1,7 @@
 # رهیاب نسخه‌ها
 
 لیست آخرین نسخه‌های مخازن مورد نظر:
-**آخرین بررسی:** 2025-10-06 18:40:54 UTC
+**آخرین بررسی:** 2025-10-07 18:41:58 UTC
 
 | لینک مخزن | آخرین نسخه | منبع |
 |---|---|---|
@@ -19,7 +19,7 @@
 | [C A M E R A 3 6 0](https://github.com/vpnclashfa-backup/c_a_m_e_r_a_3_6_0) | [**updates-2025-09-20-085410**](https://github.com/vpnclashfa-backup/c_a_m_e_r_a_3_6_0/releases/tag/updates-2025-09-20-085410) | [مشاهده](https://www.farsroid.com/camera360/) |
 | [C A M S C A N N E R A N D R O I D](https://github.com/vpnclashfa-backup/c_a_m_s_c_a_n_n_e_r_a_n_d_r_o_i_d) | [**updates-2025-10-01-091519**](https://github.com/vpnclashfa-backup/c_a_m_s_c_a_n_n_e_r_a_n_d_r_o_i_d/releases/tag/updates-2025-10-01-091519) | [مشاهده](https://www.farsroid.com/camscanner-android/) |
 | [C A P C U T V I D E O E D I T O R](https://github.com/vpnclashfa-backup/c_a_p_c_u_t_v_i_d_e_o_e_d_i_t_o_r) | [**updates-2025-09-15-091935**](https://github.com/vpnclashfa-backup/c_a_p_c_u_t_v_i_d_e_o_e_d_i_t_o_r/releases/tag/updates-2025-09-15-091935) | [مشاهده](https://www.farsroid.com/capcut-video-editor/) |
-| [C H O M P S M S](https://github.com/vpnclashfa-backup/c_h_o_m_p_s_m_s) | [**updates-2025-09-15-093024**](https://github.com/vpnclashfa-backup/c_h_o_m_p_s_m_s/releases/tag/updates-2025-09-15-093024) | [مشاهده](https://www.farsroid.com/chomp-sms/) |
+| [C H O M P S M S](https://github.com/vpnclashfa-backup/c_h_o_m_p_s_m_s) | [**updates-2025-10-07-093005**](https://github.com/vpnclashfa-backup/c_h_o_m_p_s_m_s/releases/tag/updates-2025-10-07-093005) | [مشاهده](https://www.farsroid.com/chomp-sms/) |
 | [C P U Z A N D R O I D](https://github.com/vpnclashfa-backup/c_p_u_z_a_n_d_r_o_i_d) | [**updates-2025-08-21-093233**](https://github.com/vpnclashfa-backup/c_p_u_z_a_n_d_r_o_i_d/releases/tag/updates-2025-08-21-093233) | [مشاهده](https://www.farsroid.com/cpu-z-android/) |
 | [D E V I C E I N F O A N D R O I D](https://github.com/vpnclashfa-backup/d_e_v_i_c_e_i_n_f_o_a_n_d_r_o_i_d) | [**updates-2025-05-26-100447**](https://github.com/vpnclashfa-backup/d_e_v_i_c_e_i_n_f_o_a_n_d_r_o_i_d/releases/tag/updates-2025-05-26-100447) | [مشاهده](https://www.farsroid.com/device-info-android/) |
 | [D U P L I C A T E F I L E S R E M O V E R](https://github.com/vpnclashfa-backup/d_u_p_l_i_c_a_t_e_f_i_l_e_s_r_e_m_o_v_e_r) | [**updates-2025-08-23-093223**](https://github.com/vpnclashfa-backup/d_u_p_l_i_c_a_t_e_f_i_l_e_s_r_e_m_o_v_e_r/releases/tag/updates-2025-08-23-093223) | [مشاهده](https://www.farsroid.com/duplicate-files-remover/) |
