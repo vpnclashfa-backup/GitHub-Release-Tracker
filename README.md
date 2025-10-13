@@ -1,11 +1,11 @@
 # رهیاب نسخه‌ها
 
 لیست آخرین نسخه‌های مخازن مورد نظر:
-**آخرین بررسی:** 2025-10-12 18:35:09 UTC
+**آخرین بررسی:** 2025-10-13 18:38:53 UTC
 
 | لینک مخزن | آخرین نسخه | منبع |
 |---|---|---|
-| [Telegram Auto Release](https://github.com/vpnclashfa-backup/telegram-auto-release) | [**telegram-updates-2025-10-11**](https://github.com/vpnclashfa-backup/telegram-auto-release/releases/tag/telegram-updates-2025-10-11) | [مشاهده](https://telegram.org/apps) |
+| [Telegram Auto Release](https://github.com/vpnclashfa-backup/telegram-auto-release) | [**telegram-updates-2025-10-13**](https://github.com/vpnclashfa-backup/telegram-auto-release/releases/tag/telegram-updates-2025-10-13) | [مشاهده](https://telegram.org/apps) |
 | [3 C T O O L B O X P R O A N D R O I D](https://github.com/vpnclashfa-backup/3_c_t_o_o_l_b_o_x_p_r_o_a_n_d_r_o_i_d) | [**updates-2025-09-05-081424**](https://github.com/vpnclashfa-backup/3_c_t_o_o_l_b_o_x_p_r_o_a_n_d_r_o_i_d/releases/tag/updates-2025-09-05-081424) | [مشاهده](https://www.farsroid.com/3c-toolbox-pro-android/) |
 | [A D O B E P H O T O S H O P L I G H T R O O M C C](https://github.com/vpnclashfa-backup/a_d_o_b_e_p_h_o_t_o_s_h_o_p_l_i_g_h_t_r_o_o_m_c_c) | [**updates-2025-05-29-085108**](https://github.com/vpnclashfa-backup/a_d_o_b_e_p_h_o_t_o_s_h_o_p_l_i_g_h_t_r_o_o_m_c_c/releases/tag/updates-2025-05-29-085108) | [مشاهده](https://www.farsroid.com/adobe-photoshop-lightroom-cc/) |
 | [A D V A N C E D D O W N L O A D M A N A G E R P R O](https://github.com/vpnclashfa-backup/a_d_v_a_n_c_e_d_d_o_w_n_l_o_a_d_m_a_n_a_g_e_r_p_r_o) | [**updates-2025-05-26-005415**](https://github.com/vpnclashfa-backup/a_d_v_a_n_c_e_d_d_o_w_n_l_o_a_d_m_a_n_a_g_e_r_p_r_o/releases/tag/updates-2025-05-26-005415) | [مشاهده](https://www.farsroid.com/advanced-download-manager-pro/) |
@@ -49,7 +49,7 @@
 | [N E T S H A R E A N D R O I D](https://github.com/vpnclashfa-backup/n_e_t_s_h_a_r_e_a_n_d_r_o_i_d) | [**updates-2025-05-26-113737**](https://github.com/vpnclashfa-backup/n_e_t_s_h_a_r_e_a_n_d_r_o_i_d/releases/tag/updates-2025-05-26-113737) | [مشاهده](https://www.farsroid.com/netshare-android/) |
 | [N E T W O R K A N A L Y Z E R P R O](https://github.com/vpnclashfa-backup/n_e_t_w_o_r_k_a_n_a_l_y_z_e_r_p_r_o) | [**updates-2025-05-26-113146**](https://github.com/vpnclashfa-backup/n_e_t_w_o_r_k_a_n_a_l_y_z_e_r_p_r_o/releases/tag/updates-2025-05-26-113146) | [مشاهده](https://www.farsroid.com/network-analyzer-pro/) |
 | [N O V A T V A N D R O I D](https://github.com/vpnclashfa-backup/n_o_v_a_t_v_a_n_d_r_o_i_d) | [**updates-2025-08-20-113433**](https://github.com/vpnclashfa-backup/n_o_v_a_t_v_a_n_d_r_o_i_d/releases/tag/updates-2025-08-20-113433) | [مشاهده](https://www.farsroid.com/novatv-android/) |
-| [O F F I C E S U I T E A N D R O I D](https://github.com/vpnclashfa-backup/o_f_f_i_c_e_s_u_i_t_e_a_n_d_r_o_i_d) | [**updates-2025-10-01-114229**](https://github.com/vpnclashfa-backup/o_f_f_i_c_e_s_u_i_t_e_a_n_d_r_o_i_d/releases/tag/updates-2025-10-01-114229) | [مشاهده](https://www.farsroid.com/officesuite-android/) |
+| [O F F I C E S U I T E A N D R O I D](https://github.com/vpnclashfa-backup/o_f_f_i_c_e_s_u_i_t_e_a_n_d_r_o_i_d) | [**updates-2025-10-13-114302**](https://github.com/vpnclashfa-backup/o_f_f_i_c_e_s_u_i_t_e_a_n_d_r_o_i_d/releases/tag/updates-2025-10-13-114302) | [مشاهده](https://www.farsroid.com/officesuite-android/) |
 | [O F F L I N E L A N G U A G E T R A N S L A T O R](https://github.com/vpnclashfa-backup/o_f_f_l_i_n_e_l_a_n_g_u_a_g_e_t_r_a_n_s_l_a_t_o_r) | [**updates-2025-05-26-114426**](https://github.com/vpnclashfa-backup/o_f_f_l_i_n_e_l_a_n_g_u_a_g_e_t_r_a_n_s_l_a_t_o_r/releases/tag/updates-2025-05-26-114426) | [مشاهده](https://www.farsroid.com/offline-language-translator/) |
 | [P D F T O I M A G E C O N V E R T E R P R E M I U M](https://github.com/vpnclashfa-backup/p_d_f_t_o_i_m_a_g_e_c_o_n_v_e_r_t_e_r_p_r_e_m_i_u_m) | [**updates-2025-05-26-114812**](https://github.com/vpnclashfa-backup/p_d_f_t_o_i_m_a_g_e_c_o_n_v_e_r_t_e_r_p_r_e_m_i_u_m/releases/tag/updates-2025-05-26-114812) | [مشاهده](https://www.farsroid.com/pdf-to-image-converter-premium/) |
 | [P H O T O L A B P R O](https://github.com/vpnclashfa-backup/p_h_o_t_o_l_a_b_p_r_o) | [**updates-2025-05-26-115629**](https://github.com/vpnclashfa-backup/p_h_o_t_o_l_a_b_p_r_o/releases/tag/updates-2025-05-26-115629) | [مشاهده](https://www.farsroid.com/pho-to-lab-pro/) |
