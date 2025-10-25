@@ -1,7 +1,7 @@
 # رهیاب نسخه‌ها
 
 لیست آخرین نسخه‌های مخازن مورد نظر:
-**آخرین بررسی:** 2025-10-24 18:39:03 UTC
+**آخرین بررسی:** 2025-10-25 18:36:34 UTC
 
 | لینک مخزن | آخرین نسخه | منبع |
 |---|---|---|
@@ -54,7 +54,7 @@
 | [P D F T O I M A G E C O N V E R T E R P R E M I U M](https://github.com/vpnclashfa-backup/p_d_f_t_o_i_m_a_g_e_c_o_n_v_e_r_t_e_r_p_r_e_m_i_u_m) | [**updates-2025-05-26-114812**](https://github.com/vpnclashfa-backup/p_d_f_t_o_i_m_a_g_e_c_o_n_v_e_r_t_e_r_p_r_e_m_i_u_m/releases/tag/updates-2025-05-26-114812) | [مشاهده](https://www.farsroid.com/pdf-to-image-converter-premium/) |
 | [P H O T O L A B P R O](https://github.com/vpnclashfa-backup/p_h_o_t_o_l_a_b_p_r_o) | [**updates-2025-05-26-115629**](https://github.com/vpnclashfa-backup/p_h_o_t_o_l_a_b_p_r_o/releases/tag/updates-2025-05-26-115629) | [مشاهده](https://www.farsroid.com/pho-to-lab-pro/) |
 | [P H O T O R O O M](https://github.com/vpnclashfa-backup/p_h_o_t_o_r_o_o_m) | [**updates-2025-09-25-115631**](https://github.com/vpnclashfa-backup/p_h_o_t_o_r_o_o_m/releases/tag/updates-2025-09-25-115631) | [مشاهده](https://www.farsroid.com/photoroom/) |
-| [P I C S A R T A N D R O I D](https://github.com/vpnclashfa-backup/p_i_c_s_a_r_t_a_n_d_r_o_i_d) | [**updates-2025-10-21-122047**](https://github.com/vpnclashfa-backup/p_i_c_s_a_r_t_a_n_d_r_o_i_d/releases/tag/updates-2025-10-21-122047) | [مشاهده](https://www.farsroid.com/picsart-android/) |
+| [P I C S A R T A N D R O I D](https://github.com/vpnclashfa-backup/p_i_c_s_a_r_t_a_n_d_r_o_i_d) | [**updates-2025-10-25-121754**](https://github.com/vpnclashfa-backup/p_i_c_s_a_r_t_a_n_d_r_o_i_d/releases/tag/updates-2025-10-25-121754) | [مشاهده](https://www.farsroid.com/picsart-android/) |
 | [P I K A C H A R G I N G S H O W](https://github.com/vpnclashfa-backup/p_i_k_a_c_h_a_r_g_i_n_g_s_h_o_w) | [**updates-2025-05-26-133703**](https://github.com/vpnclashfa-backup/p_i_k_a_c_h_a_r_g_i_n_g_s_h_o_w/releases/tag/updates-2025-05-26-133703) | [مشاهده](https://www.farsroid.com/pika-charging-show/) |
 | [P L A Y E R P R O M U S I C P L A Y E R](https://github.com/vpnclashfa-backup/p_l_a_y_e_r_p_r_o_m_u_s_i_c_p_l_a_y_e_r) | [**updates-2025-05-27-134438**](https://github.com/vpnclashfa-backup/p_l_a_y_e_r_p_r_o_m_u_s_i_c_p_l_a_y_e_r/releases/tag/updates-2025-05-27-134438) | [مشاهده](https://www.farsroid.com/playerpro-music-player/) |
 | [Q U I C K E D I T T E X T E D I T O R P R O A N D R O I D](https://github.com/vpnclashfa-backup/q_u_i_c_k_e_d_i_t_t_e_x_t_e_d_i_t_o_r_p_r_o_a_n_d_r_o_i_d) | [**updates-2025-07-16-130517**](https://github.com/vpnclashfa-backup/q_u_i_c_k_e_d_i_t_t_e_x_t_e_d_i_t_o_r_p_r_o_a_n_d_r_o_i_d/releases/tag/updates-2025-07-16-130517) | [مشاهده](https://www.farsroid.com/quickedit-text-editor-pro-android/) |
@@ -67,7 +67,7 @@
 | [V I D E O C O N V E R T E R C O M P R E S S O R](https://github.com/vpnclashfa-backup/v_i_d_e_o_c_o_n_v_e_r_t_e_r_c_o_m_p_r_e_s_s_o_r) | [**updates-2025-09-17-132019**](https://github.com/vpnclashfa-backup/v_i_d_e_o_c_o_n_v_e_r_t_e_r_c_o_m_p_r_e_s_s_o_r/releases/tag/updates-2025-09-17-132019) | [مشاهده](https://www.farsroid.com/video-converter-compressor/) |
 | [V I V A T V A N D R O I D](https://github.com/vpnclashfa-backup/v_i_v_a_t_v_a_n_d_r_o_i_d) | [**updates-2025-05-26-134541**](https://github.com/vpnclashfa-backup/v_i_v_a_t_v_a_n_d_r_o_i_d/releases/tag/updates-2025-05-26-134541) | [مشاهده](https://www.farsroid.com/vivatv-android/) |
 | [W E A T H E R B U G E L I T E](https://github.com/vpnclashfa-backup/w_e_a_t_h_e_r_b_u_g_e_l_i_t_e) | [**updates-2025-05-26-134720**](https://github.com/vpnclashfa-backup/w_e_a_t_h_e_r_b_u_g_e_l_i_t_e/releases/tag/updates-2025-05-26-134720) | [مشاهده](https://www.farsroid.com/weatherbug-elite/) |
-| [W P S O F F I C E F U L L A N D R O I D](https://github.com/vpnclashfa-backup/w_p_s_o_f_f_i_c_e_f_u_l_l_a_n_d_r_o_i_d) | [**updates-2025-10-10-133557**](https://github.com/vpnclashfa-backup/w_p_s_o_f_f_i_c_e_f_u_l_l_a_n_d_r_o_i_d/releases/tag/updates-2025-10-10-133557) | [مشاهده](https://www.farsroid.com/wps-office-full-android/) |
+| [W P S O F F I C E F U L L A N D R O I D](https://github.com/vpnclashfa-backup/w_p_s_o_f_f_i_c_e_f_u_l_l_a_n_d_r_o_i_d) | [**updates-2025-10-25-133048**](https://github.com/vpnclashfa-backup/w_p_s_o_f_f_i_c_e_f_u_l_l_a_n_d_r_o_i_d/releases/tag/updates-2025-10-25-133048) | [مشاهده](https://www.farsroid.com/wps-office-full-android/) |
 | [Z A P Y A F O R A N D R O I D](https://github.com/vpnclashfa-backup/z_a_p_y_a_f_o_r_a_n_d_r_o_i_d) | [**updates-2025-06-27-134211**](https://github.com/vpnclashfa-backup/z_a_p_y_a_f_o_r_a_n_d_r_o_i_d/releases/tag/updates-2025-06-27-134211) | [مشاهده](https://www.farsroid.com/zapya-for-android/) |
 | [Z A R C H I V E R](https://github.com/vpnclashfa-backup/z_a_r_c_h_i_v_e_r) | [**updates-2025-05-26-135133**](https://github.com/vpnclashfa-backup/z_a_r_c_h_i_v_e_r/releases/tag/updates-2025-05-26-135133) | [مشاهده](https://www.farsroid.com/zarchiver/) |
 ---
