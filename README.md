@@ -1,7 +1,7 @@
 # رهیاب نسخه‌ها
 
 لیست آخرین نسخه‌های مخازن مورد نظر:
-**آخرین بررسی:** 2025-10-29 18:43:21 UTC
+**آخرین بررسی:** 2025-10-30 18:43:29 UTC
 
 | لینک مخزن | آخرین نسخه | منبع |
 |---|---|---|
@@ -17,7 +17,7 @@
 | [B 6 2 3 P H O T O E D I T O R](https://github.com/vpnclashfa-backup/b_6_2_3_p_h_o_t_o_e_d_i_t_o_r) | [**updates-2025-05-26-010251**](https://github.com/vpnclashfa-backup/b_6_2_3_p_h_o_t_o_e_d_i_t_o_r/releases/tag/updates-2025-05-26-010251) | [مشاهده](https://www.farsroid.com/b623-photo-editor/) |
 | [C A L C T A P E S M A R T C A L C U L A T O R](https://github.com/vpnclashfa-backup/c_a_l_c_t_a_p_e_s_m_a_r_t_c_a_l_c_u_l_a_t_o_r) | [**updates-2025-05-26-100159**](https://github.com/vpnclashfa-backup/c_a_l_c_t_a_p_e_s_m_a_r_t_c_a_l_c_u_l_a_t_o_r/releases/tag/updates-2025-05-26-100159) | [مشاهده](https://www.farsroid.com/calctape-smart-calculator/) |
 | [C A M E R A 3 6 0](https://github.com/vpnclashfa-backup/c_a_m_e_r_a_3_6_0) | [**updates-2025-09-20-085410**](https://github.com/vpnclashfa-backup/c_a_m_e_r_a_3_6_0/releases/tag/updates-2025-09-20-085410) | [مشاهده](https://www.farsroid.com/camera360/) |
-| [C A M S C A N N E R A N D R O I D](https://github.com/vpnclashfa-backup/c_a_m_s_c_a_n_n_e_r_a_n_d_r_o_i_d) | [**updates-2025-10-01-091519**](https://github.com/vpnclashfa-backup/c_a_m_s_c_a_n_n_e_r_a_n_d_r_o_i_d/releases/tag/updates-2025-10-01-091519) | [مشاهده](https://www.farsroid.com/camscanner-android/) |
+| [C A M S C A N N E R A N D R O I D](https://github.com/vpnclashfa-backup/c_a_m_s_c_a_n_n_e_r_a_n_d_r_o_i_d) | [**updates-2025-10-30-091527**](https://github.com/vpnclashfa-backup/c_a_m_s_c_a_n_n_e_r_a_n_d_r_o_i_d/releases/tag/updates-2025-10-30-091527) | [مشاهده](https://www.farsroid.com/camscanner-android/) |
 | [C A P C U T V I D E O E D I T O R](https://github.com/vpnclashfa-backup/c_a_p_c_u_t_v_i_d_e_o_e_d_i_t_o_r) | [**updates-2025-10-28-091649**](https://github.com/vpnclashfa-backup/c_a_p_c_u_t_v_i_d_e_o_e_d_i_t_o_r/releases/tag/updates-2025-10-28-091649) | [مشاهده](https://www.farsroid.com/capcut-video-editor/) |
 | [C H O M P S M S](https://github.com/vpnclashfa-backup/c_h_o_m_p_s_m_s) | [**updates-2025-10-10-093040**](https://github.com/vpnclashfa-backup/c_h_o_m_p_s_m_s/releases/tag/updates-2025-10-10-093040) | [مشاهده](https://www.farsroid.com/chomp-sms/) |
 | [C P U Z A N D R O I D](https://github.com/vpnclashfa-backup/c_p_u_z_a_n_d_r_o_i_d) | [**updates-2025-08-21-093233**](https://github.com/vpnclashfa-backup/c_p_u_z_a_n_d_r_o_i_d/releases/tag/updates-2025-08-21-093233) | [مشاهده](https://www.farsroid.com/cpu-z-android/) |
@@ -36,7 +36,7 @@
 | [G N O T E S S Y N C N O T E S W I T H G M A I L](https://github.com/vpnclashfa-backup/g_n_o_t_e_s_s_y_n_c_n_o_t_e_s_w_i_t_h_g_m_a_i_l) | [**updates-2025-05-26-105146**](https://github.com/vpnclashfa-backup/g_n_o_t_e_s_s_y_n_c_n_o_t_e_s_w_i_t_h_g_m_a_i_l/releases/tag/updates-2025-05-26-105146) | [مشاهده](https://www.farsroid.com/gnotes-sync-notes-with-gmail/) |
 | [G O K E Y B O A R D](https://github.com/vpnclashfa-backup/g_o_k_e_y_b_o_a_r_d) | [**updates-2025-05-26-105143**](https://github.com/vpnclashfa-backup/g_o_k_e_y_b_o_a_r_d/releases/tag/updates-2025-05-26-105143) | [مشاهده](https://www.farsroid.com/go-keyboard/) |
 | [G R U B L 4 D L I V E W A L L P A P E R S](https://github.com/vpnclashfa-backup/g_r_u_b_l_4_d_l_i_v_e_w_a_l_l_p_a_p_e_r_s) | [**updates-2025-07-16-104507**](https://github.com/vpnclashfa-backup/g_r_u_b_l_4_d_l_i_v_e_w_a_l_l_p_a_p_e_r_s/releases/tag/updates-2025-07-16-104507) | [مشاهده](https://www.farsroid.com/grubl-4d-live-wallpapers/) |
-| [I N S H O T V I D E O E D I T O R](https://github.com/vpnclashfa-backup/i_n_s_h_o_t_v_i_d_e_o_e_d_i_t_o_r) | [**updates-2025-10-15-104347**](https://github.com/vpnclashfa-backup/i_n_s_h_o_t_v_i_d_e_o_e_d_i_t_o_r/releases/tag/updates-2025-10-15-104347) | [مشاهده](https://www.farsroid.com/inshot-video-editor/) |
+| [I N S H O T V I D E O E D I T O R](https://github.com/vpnclashfa-backup/i_n_s_h_o_t_v_i_d_e_o_e_d_i_t_o_r) | [**updates-2025-10-30-104253**](https://github.com/vpnclashfa-backup/i_n_s_h_o_t_v_i_d_e_o_e_d_i_t_o_r/releases/tag/updates-2025-10-30-104253) | [مشاهده](https://www.farsroid.com/inshot-video-editor/) |
 | [I N S T A P A P E R A N D R O I D](https://github.com/vpnclashfa-backup/i_n_s_t_a_p_a_p_e_r_a_n_d_r_o_i_d) | [**updates-2025-09-15-104655**](https://github.com/vpnclashfa-backup/i_n_s_t_a_p_a_p_e_r_a_n_d_r_o_i_d/releases/tag/updates-2025-09-15-104655) | [مشاهده](https://www.farsroid.com/instapaper-android/) |
 | [I N T E R N E T S P E E D M E T E R A N D R O I D](https://github.com/vpnclashfa-backup/i_n_t_e_r_n_e_t_s_p_e_e_d_m_e_t_e_r_a_n_d_r_o_i_d) | [**updates-2025-05-26-105612**](https://github.com/vpnclashfa-backup/i_n_t_e_r_n_e_t_s_p_e_e_d_m_e_t_e_r_a_n_d_r_o_i_d/releases/tag/updates-2025-05-26-105612) | [مشاهده](https://www.farsroid.com/internet-speed-meter-android/) |
 | [J E F I T W O R K O U T](https://github.com/vpnclashfa-backup/j_e_f_i_t_w_o_r_k_o_u_t) | [**updates-2025-05-26-105805**](https://github.com/vpnclashfa-backup/j_e_f_i_t_w_o_r_k_o_u_t/releases/tag/updates-2025-05-26-105805) | [مشاهده](https://www.farsroid.com/jefit-workout/) |
