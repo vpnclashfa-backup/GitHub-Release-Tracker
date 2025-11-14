@@ -1,12 +1,12 @@
 # رهیاب نسخه‌ها
 
 لیست آخرین نسخه‌های مخازن مورد نظر:
-**آخرین بررسی:** 2025-11-13 18:43:04 UTC
+**آخرین بررسی:** 2025-11-14 18:43:12 UTC
 
 | لینک مخزن | آخرین نسخه | منبع |
 |---|---|---|
 | [Telegram Auto Release](https://github.com/vpnclashfa-backup/telegram-auto-release) | [**telegram-updates-2025-10-23**](https://github.com/vpnclashfa-backup/telegram-auto-release/releases/tag/telegram-updates-2025-10-23) | [مشاهده](https://telegram.org/apps) |
-| [3 C T O O L B O X P R O A N D R O I D](https://github.com/vpnclashfa-backup/3_c_t_o_o_l_b_o_x_p_r_o_a_n_d_r_o_i_d) | [**updates-2025-10-23-081508**](https://github.com/vpnclashfa-backup/3_c_t_o_o_l_b_o_x_p_r_o_a_n_d_r_o_i_d/releases/tag/updates-2025-10-23-081508) | [مشاهده](https://www.farsroid.com/3c-toolbox-pro-android/) |
+| [3 C T O O L B O X P R O A N D R O I D](https://github.com/vpnclashfa-backup/3_c_t_o_o_l_b_o_x_p_r_o_a_n_d_r_o_i_d) | [**updates-2025-11-14-081432**](https://github.com/vpnclashfa-backup/3_c_t_o_o_l_b_o_x_p_r_o_a_n_d_r_o_i_d/releases/tag/updates-2025-11-14-081432) | [مشاهده](https://www.farsroid.com/3c-toolbox-pro-android/) |
 | [A D O B E P H O T O S H O P L I G H T R O O M C C](https://github.com/vpnclashfa-backup/a_d_o_b_e_p_h_o_t_o_s_h_o_p_l_i_g_h_t_r_o_o_m_c_c) | [**updates-2025-05-29-085108**](https://github.com/vpnclashfa-backup/a_d_o_b_e_p_h_o_t_o_s_h_o_p_l_i_g_h_t_r_o_o_m_c_c/releases/tag/updates-2025-05-29-085108) | [مشاهده](https://www.farsroid.com/adobe-photoshop-lightroom-cc/) |
 | [A D V A N C E D D O W N L O A D M A N A G E R P R O](https://github.com/vpnclashfa-backup/a_d_v_a_n_c_e_d_d_o_w_n_l_o_a_d_m_a_n_a_g_e_r_p_r_o) | [**updates-2025-05-26-005415**](https://github.com/vpnclashfa-backup/a_d_v_a_n_c_e_d_d_o_w_n_l_o_a_d_m_a_n_a_g_e_r_p_r_o/releases/tag/updates-2025-05-26-005415) | [مشاهده](https://www.farsroid.com/advanced-download-manager-pro/) |
 | [A I A R T G E N E R A T O R](https://github.com/vpnclashfa-backup/a_i_a_r_t_g_e_n_e_r_a_t_o_r) | [**updates-2025-05-26-095851**](https://github.com/vpnclashfa-backup/a_i_a_r_t_g_e_n_e_r_a_t_o_r/releases/tag/updates-2025-05-26-095851) | [مشاهده](https://www.farsroid.com/ai-art-generator/) |
@@ -17,7 +17,7 @@
 | [B 6 2 3 P H O T O E D I T O R](https://github.com/vpnclashfa-backup/b_6_2_3_p_h_o_t_o_e_d_i_t_o_r) | [**updates-2025-05-26-010251**](https://github.com/vpnclashfa-backup/b_6_2_3_p_h_o_t_o_e_d_i_t_o_r/releases/tag/updates-2025-05-26-010251) | [مشاهده](https://www.farsroid.com/b623-photo-editor/) |
 | [C A L C T A P E S M A R T C A L C U L A T O R](https://github.com/vpnclashfa-backup/c_a_l_c_t_a_p_e_s_m_a_r_t_c_a_l_c_u_l_a_t_o_r) | [**updates-2025-05-26-100159**](https://github.com/vpnclashfa-backup/c_a_l_c_t_a_p_e_s_m_a_r_t_c_a_l_c_u_l_a_t_o_r/releases/tag/updates-2025-05-26-100159) | [مشاهده](https://www.farsroid.com/calctape-smart-calculator/) |
 | [C A M E R A 3 6 0](https://github.com/vpnclashfa-backup/c_a_m_e_r_a_3_6_0) | [**updates-2025-09-20-085410**](https://github.com/vpnclashfa-backup/c_a_m_e_r_a_3_6_0/releases/tag/updates-2025-09-20-085410) | [مشاهده](https://www.farsroid.com/camera360/) |
-| [C A M S C A N N E R A N D R O I D](https://github.com/vpnclashfa-backup/c_a_m_s_c_a_n_n_e_r_a_n_d_r_o_i_d) | [**updates-2025-11-08-091422**](https://github.com/vpnclashfa-backup/c_a_m_s_c_a_n_n_e_r_a_n_d_r_o_i_d/releases/tag/updates-2025-11-08-091422) | [مشاهده](https://www.farsroid.com/camscanner-android/) |
+| [C A M S C A N N E R A N D R O I D](https://github.com/vpnclashfa-backup/c_a_m_s_c_a_n_n_e_r_a_n_d_r_o_i_d) | [**updates-2025-11-14-091451**](https://github.com/vpnclashfa-backup/c_a_m_s_c_a_n_n_e_r_a_n_d_r_o_i_d/releases/tag/updates-2025-11-14-091451) | [مشاهده](https://www.farsroid.com/camscanner-android/) |
 | [C A P C U T V I D E O E D I T O R](https://github.com/vpnclashfa-backup/c_a_p_c_u_t_v_i_d_e_o_e_d_i_t_o_r) | [**updates-2025-10-28-091649**](https://github.com/vpnclashfa-backup/c_a_p_c_u_t_v_i_d_e_o_e_d_i_t_o_r/releases/tag/updates-2025-10-28-091649) | [مشاهده](https://www.farsroid.com/capcut-video-editor/) |
 | [C H O M P S M S](https://github.com/vpnclashfa-backup/c_h_o_m_p_s_m_s) | [**updates-2025-11-02-092437**](https://github.com/vpnclashfa-backup/c_h_o_m_p_s_m_s/releases/tag/updates-2025-11-02-092437) | [مشاهده](https://www.farsroid.com/chomp-sms/) |
 | [C P U Z A N D R O I D](https://github.com/vpnclashfa-backup/c_p_u_z_a_n_d_r_o_i_d) | [**updates-2025-08-21-093233**](https://github.com/vpnclashfa-backup/c_p_u_z_a_n_d_r_o_i_d/releases/tag/updates-2025-08-21-093233) | [مشاهده](https://www.farsroid.com/cpu-z-android/) |
